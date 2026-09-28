@@ -244,7 +244,7 @@
                     <!-- Objectives -->
                     <div class="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl shadow-xl hover:bg-white/15 transition-colors">
                         <div class="w-12 h-12 bg-amazon-500/80 rounded-xl flex items-center justify-center mb-5 text-white shadow-sm border border-amazon-400/50">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
                         </div>
                         <h3 class="text-xl font-bold text-white mb-3 tracking-wide">Key Objectives</h3>
                         <ul class="text-gray-200 text-sm leading-relaxed space-y-2">
@@ -372,8 +372,43 @@
                         <p>Fast-growing pioneer species rapidly colonize these high-light environments, initiating a dynamic recovery process that can take decades or even centuries to reach maturity. Evaluating the trajectory of this gap-phase regeneration—and comparing it across different soil types, topographies, and microclimates—provides vital insights into the long-term resilience and vulnerability of Amazonian ecosystems.</p>
                     </div>
 
+                    <!-- VIDEO EMBED ADDED HERE -->
+                    <div class="my-14 clear-both">
+                        <h4 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <span>🎥</span> Observatory Overview: Mapping the Storm
+                        </h4>
+                        <div class="w-full bg-black rounded-xl overflow-hidden shadow-lg border border-gray-200 aspect-video relative">
+                            <!-- Change 'promo_video.mp4' to the exact name of the file you export from Canva/CapCut -->
+                            <video controls class="w-full h-full object-cover">
+                                <source src="promo.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-3 text-center">Visualizing multi-scale storm-driven disturbances across the Amazon basin.</p>
+                    </div>
+
+                    <!-- 3D LIDAR HTML EMBED ADDED HERE -->
+                    <div class="my-14 clear-both">
+                        <h4 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <span>🌲</span> Interactive 3D Canopy Structure (LiDAR)
+                        </h4>
+                        <div class="w-full bg-[#052e16] rounded-xl border border-gray-300 shadow-xl overflow-hidden relative flex items-center justify-center" style="height: 600px;" id="lidar-container">
+                            <p id="lidar-loading-text" class="text-gray-400 font-medium absolute z-0">Loading 3D LiDAR Model...</p>
+                            <!-- The src is injected via Javascript below to ensure lazy loading -->
+                            <iframe 
+                                id="lidar-frame"
+                                width="100%" 
+                                height="100%" 
+                                frameborder="0" 
+                                style="border: none;"
+                                class="absolute z-10 bg-transparent">
+                            </iframe>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-3 text-center">Left-click and drag to rotate • Scroll to zoom • Right-click to pan</p>
+                    </div>
+
                     <div>
-                        <h4 class="text-2xl font-bold text-gray-900 border-b-2 border-amazon-500 inline-block mb-4">Modern Detection: The Wayra Approach</h4>
+                        <h4 class="text-2xl font-bold text-gray-900 border-b-2 border-amazon-500 inline-block mb-4 mt-4">Modern Detection: The Wayra Approach</h4>
                         <p>Traditionally, mapping these remote disturbances required extensive and difficult field campaigns. Today, observatories like WAOSUE leverage advanced remote sensing technologies—such as optical imagery from Landsat and Sentinel-2, paired with cloud-computing platforms like Google Earth Engine (e.g., our Wayra Tools)—to detect, delineate, and monitor windthrow events continuously. By combining this "eye in the sky" with rigorous ground-truthed field plots and micrometeorological flux towers, researchers can now build a comprehensive, multi-scale understanding of forest dynamics.</p>
                     </div>
                 </article>
@@ -448,7 +483,7 @@
                 </div>
 
                 <!-- Shiny App Link Box (Top) -->
-                <div class="max-w-4xl mx-auto bg-amazon-50 rounded-2xl p-8 border border-amazon-100 flex flex-col md:flex-row items-center justify-between shadow-sm mb-12">
+                <div class="max-w-4xl mx-auto bg-amazon-50 rounded-2xl p-8 border border-amazon-100 flex flex-col md:flex-row items-center justify-between shadow-sm mb-16">
                     <div class="mb-6 md:mb-0 md:mr-8 text-center md:text-left">
                         <h4 class="text-xl font-bold text-gray-900 mb-2">Advanced Statistical Dashboard</h4>
                         <p class="text-gray-600 text-sm leading-relaxed">
@@ -461,8 +496,9 @@
                     </a>
                 </div>
                 
-                <!-- GEE App Embed (Bottom) -->
-                <div class="w-full bg-gray-100 rounded-xl border border-gray-300 shadow-inner relative flex items-center justify-center" style="height: 750px;" id="gee-container">
+                <!-- GEE App 1: Windthrow Observatory -->
+                <h4 class="text-xl font-bold text-gray-900 mb-4 text-center">Wayra Windthrow Observatory</h4>
+                <div class="w-full bg-gray-100 rounded-xl mb-16 border border-gray-300 shadow-inner relative flex items-center justify-center" style="height: 750px;" id="gee-container">
                     <p id="gee-loading-text" class="text-gray-500 font-medium absolute z-0">Loading Earth Engine App...</p>
                     <iframe 
                         id="gee-app-frame"
@@ -470,6 +506,24 @@
                         height="100%" 
                         frameborder="0"
                         title="Wayra - Google Earth Engine Dashboard"
+                        allowfullscreen
+                        class="absolute z-10 bg-white"
+                        style="border: none; border-radius: 0.75rem;">
+                    </iframe>
+                </div>
+
+                <!-- GEE App 2: Amazon Windthrow Explorer (NEW) -->
+                <h4 class="text-xl font-bold text-gray-900 mb-4 text-center border-t border-gray-200 pt-16">Amazon Windthrow Explorer</h4>
+                <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto text-sm">Explore interactive spatial layers mapping forest disturbance and recovery dynamics across our primary study regions.</p>
+                
+                <div class="w-full bg-gray-100 rounded-xl mb-12 border border-gray-300 shadow-inner relative flex items-center justify-center" style="height: 750px;" id="gee-container-2">
+                    <p id="gee-loading-text-2" class="text-gray-500 font-medium absolute z-0">Loading Windthrow Explorer...</p>
+                    <iframe 
+                        id="gee-app-frame-2"
+                        width="100%" 
+                        height="100%" 
+                        frameborder="0"
+                        title="Amazon Windthrow Explorer"
                         allowfullscreen
                         class="absolute z-10 bg-white"
                         style="border: none; border-radius: 0.75rem;">
@@ -937,28 +991,48 @@
                         }, 10);
                     }
                     
-                    // Inject the iframe source ONLY when the tab becomes active
+                    // Inject iframe sources ONLY when the tab becomes active to keep site fast
                     if (targetId === 'apps') {
                         const geeFrame = document.getElementById('gee-app-frame');
                         if (geeFrame && !geeFrame.src) {
-                            geeFrame.src = 'https://ee-jodaurmu-windv1.projects.earthengine.app/view/amazon-windthrow-explorer';
+                            geeFrame.src = 'https://ee-jodaurmu-windv1.projects.earthengine.app/view/windthrow-amazon-observatory';
                             
                             geeFrame.onload = function() {
                                 const loadingText = document.getElementById('gee-loading-text');
                                 if(loadingText) loadingText.style.display = 'none';
                             };
                         }
+                        
+                        const geeFrame2 = document.getElementById('gee-app-frame-2');
+                        if (geeFrame2 && !geeFrame2.src) {
+                            geeFrame2.src = 'https://ee-jodaurmu-windv1.projects.earthengine.app/view/amazon-windthrow-explorer';
+                            
+                            geeFrame2.onload = function() {
+                                const loadingText2 = document.getElementById('gee-loading-text-2');
+                                if(loadingText2) loadingText2.style.display = 'none';
+                            };
+                        }
                     }
                     
-                    // SAME FIX FOR GOOGLE MY MAPS
                     if (targetId === 'data') {
                         const myMapsFrame = document.getElementById('mymaps-frame');
                         if (myMapsFrame && !myMapsFrame.src) {
-                            // Link injected WITHOUT the /u/0/ to prevent permission blocks
                             myMapsFrame.src = 'https://www.google.com/maps/d/embed?mid=1e2Qg61Qng7i2Su0AxKR1EEvIs-QbQgM&ehbc=2E312F';
                             
                             myMapsFrame.onload = function() {
                                 const loadingText = document.getElementById('mymaps-loading-text');
+                                if(loadingText) loadingText.style.display = 'none';
+                            };
+                        }
+                    }
+                    
+                    if (targetId === 'stateoftheart') {
+                        const lidarFrame = document.getElementById('lidar-frame');
+                        if (lidarFrame && !lidarFrame.src) {
+                            lidarFrame.src = 'lidar_3d.html';
+                            
+                            lidarFrame.onload = function() {
+                                const loadingText = document.getElementById('lidar-loading-text');
                                 if(loadingText) loadingText.style.display = 'none';
                             };
                         }
