@@ -447,7 +447,7 @@
                 <!-- AI Chat Embed Container -->
                 <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200" style="height: 650px;">
                     <iframe 
-                        src="https://www.chatbase.co/chatbot-iframe/4464wtk8c6pr5x5dOrwdB" 
+                        id="chatbase-iframe"
                         width="100%" 
                         height="100%" 
                         frameborder="0" 
@@ -735,20 +735,6 @@
                             <span class="text-[0.7rem] px-2 py-1 bg-teal-50 text-teal-800 rounded font-bold border border-teal-200">Highly Cited</span>
                         </div>
                     </li>
-
-                    <!-- LT.org Publication (Featured Multimedia) -->
-                    <li class="p-6 rounded-xl border border-gray-200 bg-white hover:border-amazon-300 hover:shadow-md transition-all">
-                        <h4 class="text-lg font-bold text-gray-900 mb-1">
-                            <a href="https://lt.org/publication-plus/are-extreme-storms-reshaping-amazon-faster-we-realize/" target="_blank" class="hover:text-amazon-700 transition-colors">Are extreme storms reshaping the Amazon faster than we realize?</a>
-                        </h4>
-                        <p class="text-gray-600 text-sm mb-2">
-                            <strong>Urquiza-Muñoz, J. D.</strong>
-                        </p>
-                        <p class="text-amazon-700 text-sm font-medium italic mb-3">Latest Thinking (Science Communication & Video)</p>
-                        <div class="flex gap-3">
-                            <a href="https://lt.org/publication-plus/are-extreme-storms-reshaping-amazon-faster-we-realize/" target="_blank" class="text-xs font-semibold px-3 py-1.5 bg-amazon-100 text-amazon-800 rounded shadow-sm hover:bg-amazon-200 transition">Watch & Read ➔</a>
-                        </div>
-                    </li>
                 </ul>
             </div>
         </section>
@@ -999,6 +985,14 @@
                             };
                         }
                     }
+
+                    // Also lazy-load the AI dedicated tab iframe so it is isolated correctly
+                    if (targetId === 'ai') {
+                        const chatbaseFrame = document.getElementById('chatbase-iframe');
+                        if (chatbaseFrame && !chatbaseFrame.src) {
+                            chatbaseFrame.src = 'https://www.chatbase.co/chatbot-iframe/4464wtk8c6pr5x5dOrwdB';
+                        }
+                    }
                     
                     if (targetId === 'data') {
                         const myMapsFrame = document.getElementById('mymaps-frame');
@@ -1091,6 +1085,11 @@
                     if(downloadsEl) downloadsEl.innerText = 'Unavailable';
                 });
         });
+    </script>
+    
+    <!-- Floating Chatbase AI Bubble -->
+    <script>
+        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="4464wtk8c6pr5x5dOrwdB";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
     </script>
 </body>
 </html>
