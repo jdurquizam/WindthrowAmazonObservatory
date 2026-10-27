@@ -1299,24 +1299,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Safeguard: Remove any embedded Chatbase iframe inside <main> (keep ONLY floating bubble)
-            function purgeEmbeddedChat() {
-                const oldAiSection = document.getElementById('ai');
-                if (oldAiSection) oldAiSection.remove();
-                document.querySelectorAll('main iframe[src*="chatbase.co"], #apps iframe[src*="chatbase.co"]').forEach(el => {
-                    const box = el.closest('.max-w-4xl') || el.parentElement;
-                    if (box && box.id == 'apps') {
-                        box.remove();
-                    } else {
-                        el.remove();
-                    }
-                });
-            }
-            purgeEmbeddedChat();
-            const mainEl = document.querySelector('main');
-            if (mainEl) {
-                new MutationObserver(purgeEmbeddedChat).observe(mainEl, { childList: true, subtree: true });
-            }
 
             // ==========================================
             // 0. Trilingual Dictionary (EN / ES / PT)
