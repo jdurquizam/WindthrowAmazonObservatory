@@ -67,6 +67,11 @@
         .view-section.active {
             display: block;
         }
+
+        /* Extra safeguard: never allow embedded chatbase iframes inside main sections */
+        main iframe[src*="chatbase.co"] {
+            display: none !important;
+        }
         
         /* Horizontal Bidirectional Scroll Reveal Animations */
         .reveal {
@@ -567,7 +572,7 @@
             </div>
         </section>
 
-        <!-- View: APPS & DASHBOARDS (Only Shiny + 2 GEE Apps, NO AI Chat) -->
+        <!-- View: APPS & DASHBOARDS (Only Shiny + 2 GEE placeholders with //) -->
         <section id="apps" class="view-section py-16 bg-white min-h-[calc(100vh-5rem)]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="reveal text-center max-w-3xl mx-auto mb-10">
@@ -606,7 +611,7 @@
                             frameborder="0"
                             title="Amazon Windthrow Explorer"
                             allowfullscreen
-                            class="absolute z-10 bg-transparent"
+                            class="absolute z-10 bg-white"
                             style="border: none; border-radius: 0.75rem;">
                         </iframe>
                     </div>
@@ -624,7 +629,7 @@
                             frameborder="0"
                             title="Wayra - Google Earth Engine Dashboard"
                             allowfullscreen
-                            class="absolute z-10 bg-transparent"
+                            class="absolute z-10 bg-white"
                             style="border: none; border-radius: 0.75rem;">
                         </iframe>
                     </div>
@@ -1294,13 +1299,24 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Safeguard: Remove any embedded Chatbase iframe inside page sections (keep ONLY floating bubble)
-            const oldAiSection = document.getElementById('ai');
-            if (oldAiSection) oldAiSection.remove();
-            document.querySelectorAll('main iframe[src*="chatbase.co"]').forEach(el => {
-                const container = el.closest('.max-w-4xl') || el.parentElement;
-                if (container) container.remove();
-            });
+            // Safeguard: Remove any embedded Chatbase iframe inside <main> (keep ONLY floating bubble)
+            function purgeEmbeddedChat() {
+                const oldAiSection = document.getElementById('ai');
+                if (oldAiSection) oldAiSection.remove();
+                document.querySelectorAll('main iframe[src*="chatbase.co"], #apps iframe[src*="chatbase.co"]').forEach(el => {
+                    const box = el.closest('.max-w-4xl') || el.parentElement;
+                    if (box && box.id !== 'apps') {
+                        box.remove();
+                    } else {
+                        el.remove();
+                    }
+                });
+            }
+            purgeEmbeddedChat();
+            const mainEl = document.querySelector('main');
+            if (mainEl) {
+                new MutationObserver(purgeEmbeddedChat).observe(mainEl, { childList: true, subtree: true });
+            }
 
             // ==========================================
             // 0. Trilingual Dictionary (EN / ES / PT)
@@ -1847,11 +1863,11 @@
                         triggerVisibleInView(targetView);
                     }, 90);
                     
-                    // Lazy-load GEE iframes when Apps tab becomes active
+                    // GEE apps left commented out with // as requested
                     if (targetId === 'apps') {
                         const geeFrame = document.getElementById('gee-app-frame');
                         if (geeFrame && !geeFrame.src) {
-                            //geeFrame.src = 'https://ee-jodaurmu-windv1.projects.earthengine.app/view/windthrow-amazon-observatory';
+                            // geeFrame.src = 'https://ee-jodaurmu-windv1.projects.earthengine.app/view/windthrow-amazon-observatory';
                             geeFrame.onload = function() {
                                 const loadingText = document.getElementById('gee-loading-text');
                                 if(loadingText) loadingText.style.display = 'none';
@@ -1860,7 +1876,7 @@
                         
                         const geeFrame2 = document.getElementById('gee-app-frame-2');
                         if (geeFrame2 && !geeFrame2.src) {
-                            //geeFrame2.src = 'https://ee-jodaurmu-windv1.projects.earthengine.app/view/amazon-windthrow-explorer';
+                            // geeFrame2.src = 'https://ee-jodaurmu-windv1.projects.earthengine.app/view/amazon-windthrow-explorer';
                             geeFrame2.onload = function() {
                                 const loadingText2 = document.getElementById('gee-loading-text-2');
                                 if(loadingText2) loadingText2.style.display = 'none';
