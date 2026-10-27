@@ -63,28 +63,23 @@
         /* Custom Styles for SPA transitions and Hero */
         .view-section {
             display: none;
-            animation: fadeIn 0.6s ease-out;
         }
         .view-section.active {
             display: block;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
         
         /* Horizontal Bidirectional Scroll Reveal Animations */
         .reveal {
             opacity: 0;
-            transform: translateX(-60px);
+            transform: translateX(-65px);
             filter: blur(4px);
-            transition: opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1), 
-                        transform 1.5s cubic-bezier(0.22, 1, 0.36, 1),
-                        filter 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1), 
+                        transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+                        filter 1.4s cubic-bezier(0.22, 1, 0.36, 1);
             will-change: opacity, transform, filter;
         }
         .reveal.reveal-right {
-            transform: translateX(60px);
+            transform: translateX(65px);
         }
         .reveal.active {
             opacity: 1;
@@ -93,9 +88,9 @@
         }
         
         /* Staggered delays */
-        .delay-100 { transition-delay: 200ms; }
-        .delay-200 { transition-delay: 400ms; }
-        .delay-300 { transition-delay: 600ms; }
+        .delay-100 { transition-delay: 180ms; }
+        .delay-200 { transition-delay: 360ms; }
+        .delay-300 { transition-delay: 540ms; }
 
         /* Prevent number jitter during count-up */
         .count-up {
@@ -159,9 +154,9 @@
 
         /* Filter Transition */
         .team-member {
-            transition: opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1), 
-                        transform 1.5s cubic-bezier(0.22, 1, 0.36, 1),
-                        filter 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1), 
+                        transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+                        filter 1.4s cubic-bezier(0.22, 1, 0.36, 1);
         }
     </style>
 </head>
@@ -184,11 +179,10 @@
                     </a>
                 </div>
                 
-                <!-- Desktop Menu -->
+                <!-- Desktop Menu (Windthrow AI removed for a cleaner navbar) -->
                 <div class="hidden md:flex items-center space-x-3 lg:space-x-5">
                     <button class="nav-btn text-sm font-medium text-gray-600 hover:text-amazon-700 transition-colors" data-target="home" data-i18n="nav_home">Home</button>
                     <button class="nav-btn text-sm font-medium text-gray-600 hover:text-amazon-700 transition-colors" data-target="stateoftheart" data-i18n="nav_sota">State of the Art</button>
-                    <button class="nav-btn text-sm font-medium text-gray-600 hover:text-amazon-700 transition-colors" data-target="ai" data-i18n="nav_ai">Windthrow AI</button>
                     <button class="nav-btn text-sm font-medium text-gray-600 hover:text-amazon-700 transition-colors" data-target="apps" data-i18n="nav_apps">Apps</button>
                     <button class="nav-btn text-sm font-medium text-gray-600 hover:text-amazon-700 transition-colors" data-target="fluxtowers" data-i18n="nav_flux">Flux Towers</button>
                     <button class="nav-btn text-sm font-medium text-gray-600 hover:text-amazon-700 transition-colors" data-target="data" data-i18n="nav_data">Data & Citizen Science</button>
@@ -232,12 +226,11 @@
             </div>
         </div>
 
-        <!-- Mobile Menu Dropdown -->
+        <!-- Mobile Menu Dropdown (Windthrow AI removed) -->
         <div class="md:hidden hidden bg-white border-t border-gray-100 shadow-lg absolute w-full" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <button class="nav-btn block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-amazon-700 hover:bg-gray-50" data-target="home" data-i18n="nav_home">Home</button>
                 <button class="nav-btn block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-amazon-700 hover:bg-gray-50" data-target="stateoftheart" data-i18n="nav_sota">State of the Art</button>
-                <button class="nav-btn block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-amazon-700 hover:bg-gray-50" data-target="ai" data-i18n="nav_ai">Windthrow AI</button>
                 <button class="nav-btn block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-amazon-700 hover:bg-gray-50" data-target="apps" data-i18n="nav_apps">Apps</button>
                 <button class="nav-btn block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-amazon-700 hover:bg-gray-50" data-target="fluxtowers" data-i18n="nav_flux">Flux Towers</button>
                 <button class="nav-btn block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-amazon-700 hover:bg-gray-50" data-target="data" data-i18n="nav_data">Data & Citizen Science</button>
@@ -571,30 +564,6 @@
                     </div>
                 </div>
 
-            </div>
-        </section>
-
-        <!-- View: WINDTHROW AI -->
-        <section id="ai" class="view-section py-20 bg-gray-50 min-h-[calc(100vh-5rem)]">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="reveal text-center max-w-3xl mx-auto mb-12">
-                    <h2 class="text-sm font-bold text-amazon-700 tracking-widest uppercase mb-3" data-i18n="ai_badge">Artificial Intelligence</h2>
-                    <h3 class="text-3xl font-serif font-bold text-gray-900 mb-4" data-i18n="ai_title">Windthrow Expert AI</h3>
-                    <p class="text-gray-600 text-lg leading-relaxed" data-i18n="ai_desc">
-                        Ask questions directly to our AI assistant. It has been trained exclusively on WAOSUE's collection of scientific papers, thesis documents, and peer-reviewed literature regarding Amazonian windthrows.
-                    </p>
-                </div>
-
-                <!-- AI Chat Embed Container -->
-                <div class="reveal reveal-right max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200" style="height: 650px;">
-                    <iframe 
-                        src="https://www.chatbase.co/chatbot-iframe/4464wtk8c6pr5x5dOrwdB" 
-                        width="100%" 
-                        height="100%" 
-                        frameborder="0" 
-                        style="border: none; min-height: 650px;">
-                    </iframe>
-                </div>
             </div>
         </section>
 
@@ -1333,7 +1302,6 @@
                     nav_sub: "Windthrow Observatory",
                     nav_home: "Home",
                     nav_sota: "State of the Art",
-                    nav_ai: "Windthrow AI",
                     nav_apps: "Apps",
                     nav_flux: "Flux Towers",
                     nav_data: "Data & Citizen Science",
@@ -1375,9 +1343,6 @@
                     sota_title: "State of the Art: Windthrows in the Amazon",
                     sota_subtitle: "A comprehensive overview of storm-driven forest disturbances, canopy gap dynamics, and their profound implications for the global carbon cycle.",
                     sota_facts_title: "Key Characteristics",
-                    ai_badge: "Artificial Intelligence",
-                    ai_title: "Windthrow Expert AI",
-                    ai_desc: "Ask questions directly to our AI assistant. It has been trained exclusively on WAOSUE's collection of scientific papers, thesis documents, and peer-reviewed literature regarding Amazonian windthrows.",
                     apps_badge: "Interactive Spatial Data",
                     apps_title: "Wayra Tools: Windthrow Monitoring",
                     apps_desc: "Inspired by Wayra—the Quechua word for wind—these tools allow you to explore continuous monitoring dashboards visualizing storm-driven disturbance events across the Amazon.",
@@ -1449,7 +1414,6 @@
                     nav_sub: "Observatorio de Vientos",
                     nav_home: "Inicio",
                     nav_sota: "Estado del Arte",
-                    nav_ai: "IA Windthrow",
                     nav_apps: "Aplicaciones",
                     nav_flux: "Torres de Flujo",
                     nav_data: "Datos y Ciencia Ciudadana",
@@ -1491,9 +1455,6 @@
                     sota_title: "Estado del Arte: Derribos por Viento en la Amazonía",
                     sota_subtitle: "Una visión integral de los disturbios forestales impulsados por tormentas convectivas, la dinámica de claros y sus implicaciones para el ciclo global del carbono.",
                     sota_facts_title: "Características Clave",
-                    ai_badge: "Inteligencia Artificial",
-                    ai_title: "Asistente IA Experto en Windthrows",
-                    ai_desc: "Haz preguntas directamente a nuestro asistente de IA, entrenado con la colección de artículos científicos, tesis y literatura revisada por pares de WAOSUE.",
                     apps_badge: "Datos Espaciales Interactivos",
                     apps_title: "Herramientas Wayra: Monitoreo de Vientos",
                     apps_desc: "Inspiradas en Wayra —la palabra quechua para viento—, estas herramientas permiten explorar paneles interactivos de disturbios por tormentas en toda la Amazonía.",
@@ -1565,7 +1526,6 @@
                     nav_sub: "Observatório de Ventos",
                     nav_home: "Início",
                     nav_sota: "Estado da Arte",
-                    nav_ai: "IA Windthrow",
                     nav_apps: "Aplicações",
                     nav_flux: "Torres de Fluxo",
                     nav_data: "Dados e Ciência Cidadã",
@@ -1607,9 +1567,6 @@
                     sota_title: "Estado da Arte: Windthrows na Amazônia",
                     sota_subtitle: "Uma visão abrangente dos distúrbios florestais causados por tempestades convectivas, dinâmica de clareiras e suas implicações para o ciclo global do carbono.",
                     sota_facts_title: "Características Principais",
-                    ai_badge: "Inteligência Artificial",
-                    ai_title: "IA Especialista em Windthrows",
-                    ai_desc: "Faça perguntas diretamente ao nosso assistente de IA, treinado exclusivamente na coleção de artigos científicos, teses e literatura revisada por pares do WAOSUE.",
                     apps_badge: "Dados Espaciais Interativos",
                     apps_title: "Ferramentas Wayra: Monitoramento de Ventos",
                     apps_desc: "Inspiradas em Wayra —a palavra quíchua para vento—, estas ferramentas permitem explorar painéis de monitoramento contínuo de tempestades na Amazônia.",
@@ -1759,8 +1716,11 @@
             // ==========================================
             // 2. Bidirectional Horizontal Reveal & Count-Up Observers
             // ==========================================
+            let isSwitchingView = false;
+
             const revealElements = document.querySelectorAll('.reveal');
             const revealObserver = new IntersectionObserver((entries) => {
+                if (isSwitchingView) return;
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
@@ -1769,14 +1729,15 @@
                     }
                 });
             }, {
-                threshold: 0.05,
-                rootMargin: "0px 0px -15px 0px"
+                threshold: 0.08,
+                rootMargin: "0px 0px -20px 0px"
             });
 
             revealElements.forEach(el => revealObserver.observe(el));
 
             const counters = document.querySelectorAll('.count-up');
             const countObserver = new IntersectionObserver((entries) => {
+                if (isSwitchingView) return;
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         if (entry.target.dataset.isCounting !== 'true') {
@@ -1795,56 +1756,91 @@
             counters.forEach(counter => countObserver.observe(counter));
 
             function triggerVisibleInView(viewEl) {
-                requestAnimationFrame(() => {
-                    const winH = window.innerHeight || document.documentElement.clientHeight;
-                    viewEl.querySelectorAll('.reveal').forEach(el => {
-                        const rect = el.getBoundingClientRect();
-                        if (rect.top < winH - 15 && rect.bottom > 0) {
-                            el.classList.add('active');
+                const winH = window.innerHeight || document.documentElement.clientHeight;
+                viewEl.querySelectorAll('.reveal').forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < winH - 10 && rect.bottom > 0) {
+                        el.classList.add('active');
+                    }
+                });
+                viewEl.querySelectorAll('.count-up').forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < winH && rect.bottom > 0) {
+                        if (el.dataset.isCounting !== 'true') {
+                            el.dataset.isCounting = 'true';
+                            animateCounter(el);
                         }
-                    });
-                    viewEl.querySelectorAll('.count-up').forEach(el => {
-                        const rect = el.getBoundingClientRect();
-                        if (rect.top < winH && rect.bottom > 0) {
-                            if (el.dataset.isCounting !== 'true') {
-                                el.dataset.isCounting = 'true';
-                                animateCounter(el);
-                            }
-                        }
-                    });
+                    }
                 });
             }
 
             // ==========================================
-            // 3. SPA View Switching Logic
+            // 3. SPA View Switching Logic (with forced reflow so animations always move)
             // ==========================================
             const views = document.querySelectorAll('.view-section');
             const navButtons = document.querySelectorAll('.nav-btn, .nav-link');
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileMenuBtn = document.getElementById('mobile-menu-button');
+            const navbar = document.getElementById('navbar');
 
-            function switchView(targetId, skipScrollToTop = false) {
+            function switchView(targetId, customScrollTarget = null) {
+                isSwitchingView = true;
+
                 views.forEach(view => {
                     view.classList.remove('active');
-                    view.querySelectorAll('.reveal').forEach(el => el.classList.remove('active'));
-                    view.querySelectorAll('.count-up').forEach(el => {
-                        el.dataset.isCounting = 'false';
-                        resetCounter(el);
-                    });
                 });
                 
                 const targetView = document.getElementById(targetId);
                 if (targetView) {
+                    // 1. Reset all reveal elements inside targetView to their starting horizontal position without transition
+                    const targetReveals = targetView.querySelectorAll('.reveal');
+                    targetReveals.forEach(el => {
+                        el.style.transition = 'none';
+                        el.classList.remove('active');
+                    });
+
+                    const targetCounters = targetView.querySelectorAll('.count-up');
+                    targetCounters.forEach(el => {
+                        el.dataset.isCounting = 'false';
+                        resetCounter(el);
+                    });
+
+                    // 2. Make targetView visible and force browser reflow so initial offset is painted
                     targetView.classList.add('active');
-                    
-                    if (!skipScrollToTop) {
-                        window.scrollTo({ top: 0, behavior: 'auto' });
+                    void targetView.offsetWidth;
+
+                    // 3. Restore CSS transitions
+                    targetReveals.forEach(el => {
+                        el.style.transition = '';
+                    });
+
+                    // 4. Smooth scroll to the section content (just like original behavior)
+                    if (customScrollTarget) {
+                        setTimeout(() => {
+                            const navHeight = navbar.offsetHeight;
+                            const topPos = customScrollTarget.getBoundingClientRect().top + window.scrollY - navHeight - 20;
+                            window.scrollTo({ top: topPos, behavior: 'smooth' });
+                        }, 20);
+                    } else if (targetId === 'home') {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        setTimeout(() => {
+                            const contentBox = targetView.querySelector('.max-w-7xl, .max-w-5xl, .max-w-4xl, .text-center');
+                            if (contentBox) {
+                                const navHeight = navbar.offsetHeight;
+                                const topPosition = contentBox.getBoundingClientRect().top + window.scrollY - navHeight - 20;
+                                window.scrollTo({ top: topPosition, behavior: 'smooth' });
+                            }
+                        }, 20);
                     }
 
+                    // 5. Trigger horizontal slide-in animation after paint
                     setTimeout(() => {
+                        isSwitchingView = false;
                         triggerVisibleInView(targetView);
-                    }, 40);
+                    }, 90);
                     
+                    // Lazy-load iframes when tab becomes active
                     if (targetId === 'apps') {
                         const geeFrame = document.getElementById('gee-app-frame');
                         if (geeFrame && !geeFrame.src) {
@@ -1862,13 +1858,6 @@
                                 const loadingText2 = document.getElementById('gee-loading-text-2');
                                 if(loadingText2) loadingText2.style.display = 'none';
                             };
-                        }
-                    }
-
-                    if (targetId === 'ai') {
-                        const chatbaseFrame = document.getElementById('chatbase-iframe');
-                        if (chatbaseFrame && !chatbaseFrame.src) {
-                            chatbaseFrame.src = 'https://www.chatbase.co/chatbot-iframe/4464wtk8c6pr5x5dOrwdB';
                         }
                     }
                     
@@ -1924,16 +1913,8 @@
             const heroReportBtn = document.getElementById('hero-report-btn');
             if (heroReportBtn) {
                 heroReportBtn.addEventListener('click', () => {
-                    switchView('data', true);
-                    setTimeout(() => {
-                        const csBox = document.getElementById('citizen-science-box');
-                        if (csBox) {
-                            const navHeight = document.getElementById('navbar').offsetHeight;
-                            const topPos = csBox.getBoundingClientRect().top + window.scrollY - navHeight - 20;
-                            window.scrollTo({ top: topPos, behavior: 'smooth' });
-                            triggerVisibleInView(document.getElementById('data'));
-                        }
-                    }, 60);
+                    const csBox = document.getElementById('citizen-science-box');
+                    switchView('data', csBox);
                 });
             }
 
@@ -2020,7 +2001,7 @@
             }
 
             // ==========================================
-            // 5. Team Filtering Logic
+            // 5. Team Filtering Logic (with forced reflow for smooth slide-in)
             // ==========================================
             const filterBtns = document.querySelectorAll('.filter-btn');
             const teamMembers = document.querySelectorAll('.team-member');
@@ -2039,11 +2020,12 @@
                     teamMembers.forEach(member => {
                         const roles = member.getAttribute('data-roles') || '';
                         if (filterValue === 'all' || roles.includes(filterValue)) {
-                            member.style.display = '';
+                            member.style.transition = 'none';
                             member.classList.remove('active');
-                            requestAnimationFrame(() => {
-                                requestAnimationFrame(() => member.classList.add('active'));
-                            });
+                            member.style.display = '';
+                            void member.offsetWidth; // Force reflow so slide animation plays
+                            member.style.transition = '';
+                            member.classList.add('active');
                         } else {
                             member.style.display = 'none';
                             member.classList.remove('active');
