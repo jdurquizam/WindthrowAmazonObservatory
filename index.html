@@ -55,27 +55,27 @@
     </script>
     
     <style>
-        /* Custom Styles for SPA transitions and Hero */
+        /* Custom Styles for SPA transitions and Hero (Slowed down to 0.8s) */
         .view-section {
             display: none;
-            animation: fadeIn 0.4s ease-in-out;
+            animation: fadeIn 0.8s ease-out;
         }
         .view-section.active {
             display: block;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Dynamic Bidirectional Scroll Reveal Animations */
+        /* Slow & Smooth Bidirectional Scroll Reveal Animations (1.8s) */
         .reveal {
             opacity: 0;
-            transform: translateY(45px) scale(0.95);
-            filter: blur(4px);
-            transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), 
-                        transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-                        filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(50px) scale(0.96);
+            filter: blur(5px);
+            transition: opacity 1.8s cubic-bezier(0.22, 1, 0.36, 1), 
+                        transform 1.8s cubic-bezier(0.22, 1, 0.36, 1),
+                        filter 1.8s cubic-bezier(0.22, 1, 0.36, 1);
             will-change: opacity, transform, filter;
         }
         .reveal.active {
@@ -83,9 +83,10 @@
             transform: translateY(0) scale(1);
             filter: blur(0px);
         }
-        .delay-100 { transition-delay: 100ms; }
-        .delay-200 { transition-delay: 200ms; }
-        .delay-300 { transition-delay: 300ms; }
+        /* Wider staggered delays so cards appear one by one */
+        .delay-100 { transition-delay: 250ms; }
+        .delay-200 { transition-delay: 500ms; }
+        .delay-300 { transition-delay: 750ms; }
         
         /* Video Background CSS */
         .hero-pattern {
@@ -112,7 +113,7 @@
             backdrop-filter: blur(10px);
         }
         
-        /* Partners Carousel CSS */
+        /* Partners Carousel CSS (Slowed down to 45s) */
         .partners-carousel {
             overflow: hidden;
             white-space: nowrap;
@@ -124,14 +125,14 @@
         }
         .partners-track {
             display: inline-flex;
-            animation: marquee 25s linear infinite;
+            animation: marquee 45s linear infinite;
             align-items: center;
         }
         .partners-track img {
             height: 90px;
             margin: 0 50px;
             object-fit: contain;
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
         }
         .partners-track img:hover {
             transform: scale(1.05);
@@ -143,9 +144,9 @@
 
         /* Filter Transition */
         .team-member {
-            transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), 
-                        transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-                        filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1), 
+                        transform 1.6s cubic-bezier(0.22, 1, 0.36, 1),
+                        filter 1.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
     </style>
 </head>
@@ -251,7 +252,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         
                         <!-- Card 1: 5K+ Windthrows -->
-                        <div class="reveal bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl shadow-xl hover:-translate-y-1 hover:bg-white/20 transition-all duration-300">
+                        <div class="reveal bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl shadow-xl hover:-translate-y-1 hover:bg-white/20 transition-all duration-500">
                             <div class="w-10 h-10 bg-red-500/80 rounded-lg flex items-center justify-center mb-4 text-white shadow-sm border border-red-400/50">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
                             </div>
@@ -263,7 +264,7 @@
                         </div>
 
                         <!-- Card 2: The Hotspot Phenomenon -->
-                        <div class="reveal delay-100 bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl shadow-xl hover:-translate-y-1 hover:bg-white/20 transition-all duration-300">
+                        <div class="reveal delay-100 bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl shadow-xl hover:-translate-y-1 hover:bg-white/20 transition-all duration-500">
                             <div class="w-10 h-10 bg-purple-500/80 rounded-lg flex items-center justify-center mb-4 text-white shadow-sm border border-purple-400/50">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                             </div>
@@ -275,7 +276,7 @@
                         </div>
 
                         <!-- Card 3: Astonishing Resilience -->
-                        <div class="reveal delay-200 bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl shadow-xl hover:-translate-y-1 hover:bg-white/20 transition-all duration-300">
+                        <div class="reveal delay-200 bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl shadow-xl hover:-translate-y-1 hover:bg-white/20 transition-all duration-500">
                             <div class="w-10 h-10 bg-amazon-500/80 rounded-lg flex items-center justify-center mb-4 text-white shadow-sm border border-amazon-400/50">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                             </div>
@@ -287,7 +288,7 @@
                         </div>
 
                         <!-- Card 4: Ecological Succession -->
-                        <div class="reveal delay-300 bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl shadow-xl hover:-translate-y-1 hover:bg-white/20 transition-all duration-300">
+                        <div class="reveal delay-300 bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl shadow-xl hover:-translate-y-1 hover:bg-white/20 transition-all duration-500">
                             <div class="w-10 h-10 bg-blue-500/80 rounded-lg flex items-center justify-center mb-4 text-white shadow-sm border border-blue-400/50">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                             </div>
@@ -465,7 +466,6 @@
                         </h4>
                         <div class="w-full bg-[#052e16] rounded-xl border border-gray-300 shadow-xl overflow-hidden relative flex items-center justify-center" style="height: 600px;" id="lidar-container">
                             <p id="lidar-loading-text" class="text-gray-400 font-medium absolute z-0">Loading 3D LiDAR Model...</p>
-                            <!-- The src is injected via Javascript below to ensure lazy loading -->
                             <iframe 
                                 id="lidar-frame"
                                 width="100%" 
@@ -1177,30 +1177,29 @@
         </div>
     </footer>
 
-    <!-- Interactive Scripts for SPA, Bidirectional Scroll Reveal, Dynamic Counters, and APIs -->
+    <!-- Interactive Scripts for SPA, Slow Bidirectional Scroll Reveal, Steady Counters, and APIs -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
             // ==========================================
-            // 1. Dynamic Counter Functions (Count-Up & Reset)
+            // 1. Slow & Steady Counter Functions (3.8 seconds)
             // ==========================================
             function animateCounter(el) {
                 const target = parseInt(el.getAttribute('data-target'), 10);
                 if (isNaN(target)) return;
 
-                // Cancel any previous animation frame on this element
                 if (el._rafId) {
                     cancelAnimationFrame(el._rafId);
                 }
 
-                const duration = 1800; // 1.8 seconds smooth count
+                const duration = 3800; // 3.8 seconds for a relaxed, noticeable count
                 const startTime = performance.now();
 
                 function updateCount(currentTime) {
                     const elapsed = currentTime - startTime;
                     const progress = Math.min(elapsed / duration, 1);
-                    // Ease-out expo curve for a fast start and smooth finish
-                    const easeOut = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                    // Gentle quadratic ease-out so numbers climb steadily instead of jumping at the start
+                    const easeOut = 1 - Math.pow(1 - progress, 2);
                     const currentVal = Math.floor(easeOut * target);
 
                     el.innerText = currentVal.toLocaleString();
@@ -1233,16 +1232,14 @@
             const revealObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
-                        // Element enters screen -> Show with animation
                         entry.target.classList.add('active');
                     } else if (!entry.isIntersecting) {
-                        // Element completely leaves screen -> Hide so it re-animates next time
                         entry.target.classList.remove('active');
                     }
                 });
             }, {
                 threshold: [0, 0.12],
-                rootMargin: "0px 0px -20px 0px"
+                rootMargin: "0px 0px -25px 0px"
             });
 
             revealElements.forEach(el => revealObserver.observe(el));
@@ -1256,7 +1253,6 @@
                             animateCounter(entry.target);
                         }
                     } else if (!entry.isIntersecting) {
-                        // Reset counter when out of screen so it counts up again on return
                         entry.target.dataset.isCounting = 'false';
                         resetCounter(entry.target);
                     }
@@ -1279,7 +1275,6 @@
             function switchView(targetId) {
                 views.forEach(view => {
                     view.classList.remove('active');
-                    // Reset reveal and counter states in hidden views so they animate freshly when opened
                     view.querySelectorAll('.reveal').forEach(el => el.classList.remove('active'));
                     view.querySelectorAll('.count-up').forEach(el => {
                         el.dataset.isCounting = 'false';
@@ -1304,7 +1299,6 @@
                         }, 10);
                     }
                     
-                    // Lazy-load iframes when tab becomes active
                     if (targetId === 'apps') {
                         const geeFrame = document.getElementById('gee-app-frame');
                         if (geeFrame && !geeFrame.src) {
@@ -1414,7 +1408,6 @@
                         const roles = member.getAttribute('data-roles') || '';
                         if (filterValue === 'all' || roles.includes(filterValue)) {
                             member.style.display = '';
-                            // Trigger smooth reveal animation on filtered items
                             member.classList.remove('active');
                             requestAnimationFrame(() => {
                                 requestAnimationFrame(() => member.classList.add('active'));
@@ -1428,7 +1421,7 @@
             });
 
             // ==========================================
-            // 5. Zenodo API Fetch Logic (with Dynamic Count-Up)
+            // 5. Zenodo API Fetch Logic (with Slow Count-Up)
             // ==========================================
             const viewsEl = document.getElementById('zenodo-views');
             const downloadsEl = document.getElementById('zenodo-downloads');
