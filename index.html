@@ -567,7 +567,7 @@
             </div>
         </section>
 
-        <!-- View: APPS & DASHBOARDS -->
+        <!-- View: APPS & DASHBOARDS (Only Shiny + 2 GEE Apps, NO AI Chat) -->
         <section id="apps" class="view-section py-16 bg-white min-h-[calc(100vh-5rem)]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="reveal text-center max-w-3xl mx-auto mb-10">
@@ -606,7 +606,7 @@
                             frameborder="0"
                             title="Amazon Windthrow Explorer"
                             allowfullscreen
-                            class="absolute z-10 bg-white"
+                            class="absolute z-10 bg-transparent"
                             style="border: none; border-radius: 0.75rem;">
                         </iframe>
                     </div>
@@ -624,7 +624,7 @@
                             frameborder="0"
                             title="Wayra - Google Earth Engine Dashboard"
                             allowfullscreen
-                            class="absolute z-10 bg-white"
+                            class="absolute z-10 bg-transparent"
                             style="border: none; border-radius: 0.75rem;">
                         </iframe>
                     </div>
@@ -1294,6 +1294,14 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
+            // Safeguard: Remove any embedded Chatbase iframe inside page sections (keep ONLY floating bubble)
+            const oldAiSection = document.getElementById('ai');
+            if (oldAiSection) oldAiSection.remove();
+            document.querySelectorAll('main iframe[src*="chatbase.co"]').forEach(el => {
+                const container = el.closest('.max-w-4xl') || el.parentElement;
+                if (container) container.remove();
+            });
+
             // ==========================================
             // 0. Trilingual Dictionary (EN / ES / PT)
             // ==========================================
@@ -1775,7 +1783,7 @@
             }
 
             // ==========================================
-            // 3. SPA View Switching Logic (with forced reflow so animations always move)
+            // 3. SPA View Switching Logic
             // ==========================================
             const views = document.querySelectorAll('.view-section');
             const navButtons = document.querySelectorAll('.nav-btn, .nav-link');
@@ -1784,6 +1792,10 @@
             const navbar = document.getElementById('navbar');
 
             function switchView(targetId, customScrollTarget = null) {
+                if (targetId === 'ai' || !document.getElementById(targetId)) {
+                    targetId = 'home';
+                }
+
                 isSwitchingView = true;
 
                 views.forEach(view => {
@@ -1835,11 +1847,11 @@
                         triggerVisibleInView(targetView);
                     }, 90);
                     
-                    // Lazy-load iframes when tab becomes active
+                    // Lazy-load GEE iframes when Apps tab becomes active
                     if (targetId === 'apps') {
                         const geeFrame = document.getElementById('gee-app-frame');
                         if (geeFrame && !geeFrame.src) {
-                            // geeFrame.src = 'https://ee-jodaurmu-windv1.projects.earthengine.app/view/windthrow-amazon-observatory';
+                            geeFrame.src = 'https://ee-jodaurmu-windv1.projects.earthengine.app/view/windthrow-amazon-observatory';
                             geeFrame.onload = function() {
                                 const loadingText = document.getElementById('gee-loading-text');
                                 if(loadingText) loadingText.style.display = 'none';
@@ -1848,7 +1860,7 @@
                         
                         const geeFrame2 = document.getElementById('gee-app-frame-2');
                         if (geeFrame2 && !geeFrame2.src) {
-                            // geeFrame2.src = 'https://ee-jodaurmu-windv1.projects.earthengine.app/view/amazon-windthrow-explorer';
+                            geeFrame2.src = 'https://ee-jodaurmu-windv1.projects.earthengine.app/view/amazon-windthrow-explorer';
                             geeFrame2.onload = function() {
                                 const loadingText2 = document.getElementById('gee-loading-text-2');
                                 if(loadingText2) loadingText2.style.display = 'none';
@@ -1920,7 +1932,7 @@
             }
 
             const hash = window.location.hash.substring(1);
-            if (hash && document.getElementById(hash)) {
+            if (hash && hash !== 'ai' && document.getElementById(hash)) {
                 switchView(hash);
             } else {
                 switchView('home'); 
@@ -1996,7 +2008,7 @@
             }
 
             // ==========================================
-            // 5. Team Filtering Logic (with forced reflow for smooth slide-in)
+            // 5. Team Filtering Logic
             // ==========================================
             const filterBtns = document.querySelectorAll('.filter-btn');
             const teamMembers = document.querySelectorAll('.team-member');
@@ -2018,7 +2030,7 @@
                             member.style.transition = 'none';
                             member.classList.remove('active');
                             member.style.display = '';
-                            void member.offsetWidth; // Force reflow so slide animation plays
+                            void member.offsetWidth;
                             member.style.transition = '';
                             member.classList.add('active');
                         } else {
@@ -2030,7 +2042,7 @@
             });
 
             // ==========================================
-            // 6. Zenodo API Fetch Logic (with Steady Count-Up)
+            // 6. Zenodo API Fetch Logic
             // ==========================================
             const viewsEl = document.getElementById('zenodo-views');
             const downloadsEl = document.getElementById('zenodo-downloads');
