@@ -60,7 +60,7 @@
             overflow-x: hidden;
         }
 
-        /* Custom Styles for SPA transitions and Hero */
+        /* Custom Styles for SPA views */
         .view-section {
             display: none;
         }
@@ -179,7 +179,7 @@
                     </a>
                 </div>
                 
-                <!-- Desktop Menu (Windthrow AI removed for a cleaner navbar) -->
+                <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-3 lg:space-x-5">
                     <button class="nav-btn text-sm font-medium text-gray-600 hover:text-amazon-700 transition-colors" data-target="home" data-i18n="nav_home">Home</button>
                     <button class="nav-btn text-sm font-medium text-gray-600 hover:text-amazon-700 transition-colors" data-target="stateoftheart" data-i18n="nav_sota">State of the Art</button>
@@ -226,7 +226,7 @@
             </div>
         </div>
 
-        <!-- Mobile Menu Dropdown (Windthrow AI removed) -->
+        <!-- Mobile Menu Dropdown -->
         <div class="md:hidden hidden bg-white border-t border-gray-100 shadow-lg absolute w-full" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <button class="nav-btn block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-amazon-700 hover:bg-gray-50" data-target="home" data-i18n="nav_home">Home</button>
@@ -1792,7 +1792,6 @@
                 
                 const targetView = document.getElementById(targetId);
                 if (targetView) {
-                    // 1. Reset all reveal elements inside targetView to their starting horizontal position without transition
                     const targetReveals = targetView.querySelectorAll('.reveal');
                     targetReveals.forEach(el => {
                         el.style.transition = 'none';
@@ -1805,16 +1804,13 @@
                         resetCounter(el);
                     });
 
-                    // 2. Make targetView visible and force browser reflow so initial offset is painted
                     targetView.classList.add('active');
-                    void targetView.offsetWidth;
+                    void targetView.offsetWidth; // Force reflow
 
-                    // 3. Restore CSS transitions
                     targetReveals.forEach(el => {
                         el.style.transition = '';
                     });
 
-                    // 4. Smooth scroll to the section content (just like original behavior)
                     if (customScrollTarget) {
                         setTimeout(() => {
                             const navHeight = navbar.offsetHeight;
@@ -1834,7 +1830,6 @@
                         }, 20);
                     }
 
-                    // 5. Trigger horizontal slide-in animation after paint
                     setTimeout(() => {
                         isSwitchingView = false;
                         triggerVisibleInView(targetView);
@@ -2068,7 +2063,7 @@
         });
     </script>
     
-    <!-- Floating Chatbase AI Bubble -->
+    <!-- Floating Chatbase AI Bubble (Only AI entry point) -->
     <script>
         (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="4464wtk8c6pr5x5dOrwdB";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
     </script>
