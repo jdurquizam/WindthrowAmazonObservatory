@@ -55,43 +55,59 @@
     </script>
     
     <style>
-        /* Custom Styles for SPA transitions and Hero (Slowed down to 0.8s) */
+        /* Prevent horizontal scrollbar during horizontal reveal animations */
+        body, main {
+            overflow-x: hidden;
+        }
+
+        /* Custom Styles for SPA transitions and Hero */
         .view-section {
             display: none;
-            animation: fadeIn 0.8s ease-out;
+            animation: fadeIn 0.6s ease-out;
         }
         .view-section.active {
             display: block;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
-        /* Slow & Smooth Bidirectional Scroll Reveal Animations (1.8s) */
+        /* Horizontal Bidirectional Scroll Reveal Animations */
         .reveal {
             opacity: 0;
-            transform: translateY(50px) scale(0.96);
-            filter: blur(5px);
-            transition: opacity 1.8s cubic-bezier(0.22, 1, 0.36, 1), 
-                        transform 1.8s cubic-bezier(0.22, 1, 0.36, 1),
-                        filter 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: translateX(-60px);
+            filter: blur(4px);
+            transition: opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1), 
+                        transform 1.5s cubic-bezier(0.22, 1, 0.36, 1),
+                        filter 1.5s cubic-bezier(0.22, 1, 0.36, 1);
             will-change: opacity, transform, filter;
+        }
+        /* Slide in from the right for alternating elements */
+        .reveal.reveal-right {
+            transform: translateX(60px);
         }
         .reveal.active {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateX(0);
             filter: blur(0px);
         }
-        /* Wider staggered delays so cards appear one by one */
-        .delay-100 { transition-delay: 250ms; }
-        .delay-200 { transition-delay: 500ms; }
-        .delay-300 { transition-delay: 750ms; }
+        
+        /* Staggered delays */
+        .delay-100 { transition-delay: 200ms; }
+        .delay-200 { transition-delay: 400ms; }
+        .delay-300 { transition-delay: 600ms; }
+
+        /* Prevent number jitter during count-up */
+        .count-up {
+            font-variant-numeric: tabular-nums;
+            display: inline-block;
+        }
         
         /* Video Background CSS */
         .hero-pattern {
             position: relative;
-            background-color: #052e16; /* Fallback color before video loads */
+            background-color: #052e16;
             overflow: hidden;
         }
         .video-bg {
@@ -105,7 +121,7 @@
             z-index: 0;
             transform: translateX(-50%) translateY(-50%);
             object-fit: cover;
-            opacity: 0.4; /* Dims the video so the white text is readable */
+            opacity: 0.4;
         }
         
         .glass-nav {
@@ -113,7 +129,7 @@
             backdrop-filter: blur(10px);
         }
         
-        /* Partners Carousel CSS (Slowed down to 45s) */
+        /* Partners Carousel CSS */
         .partners-carousel {
             overflow: hidden;
             white-space: nowrap;
@@ -144,9 +160,9 @@
 
         /* Filter Transition */
         .team-member {
-            transition: opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1), 
-                        transform 1.6s cubic-bezier(0.22, 1, 0.36, 1),
-                        filter 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1), 
+                        transform 1.5s cubic-bezier(0.22, 1, 0.36, 1),
+                        filter 1.5s cubic-bezier(0.22, 1, 0.36, 1);
         }
     </style>
 </head>
@@ -342,7 +358,7 @@
                 </div>
 
                 <!-- Featured Research Callout Box -->
-                <div class="reveal bg-amazon-50 border-l-4 border-amazon-700 p-6 mb-16 rounded-r-lg mx-auto shadow-lg text-gray-800 max-w-3xl">
+                <div class="reveal reveal-right bg-amazon-50 border-l-4 border-amazon-700 p-6 mb-16 rounded-r-lg mx-auto shadow-lg text-gray-800 max-w-3xl">
                     <div class="flex items-start gap-4">
                         <span class="text-2xl mt-1">📢</span>
                         <div>
@@ -427,17 +443,29 @@
                 <!-- Expanded Article Content -->
                 <article class="text-gray-700 space-y-12 mb-20 text-lg leading-relaxed">
                     
-                    <!-- Quick Facts Sidebar -->
-                    <div class="reveal bg-amazon-50 rounded-2xl p-6 border border-amazon-100 float-none md:float-right md:ml-8 mb-8 w-full md:w-1/3 shadow-sm">
+                    <!-- Quick Facts Sidebar (Fixed layout so text never jitters) -->
+                    <div class="reveal reveal-right bg-amazon-50 rounded-2xl p-6 border border-amazon-100 float-none md:float-right md:ml-8 mb-8 w-full md:w-1/3 shadow-sm">
                         <h4 class="font-bold text-amazon-900 mb-3 text-lg flex items-center gap-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                             Key Characteristics
                         </h4>
                         <ul class="space-y-3 text-sm text-amazon-800">
-                            <li class="flex items-start gap-2"><span class="text-amazon-500 font-bold">Trigger:</span> Severe convective storms, squall lines, and microbursts.</li>
-                            <li class="flex items-start gap-2"><span class="text-amazon-500 font-bold">Impact:</span> Snaps and uproots canopy trees, causing up to <span class="count-up font-bold" data-target="95">0</span>% mortality in extreme events.</li>
-                            <li class="flex items-start gap-2"><span class="text-amazon-500 font-bold">Hotspots:</span> <span class="count-up font-bold" data-target="33">0</span>% of detected events occur in just <span class="count-up font-bold" data-target="3">0</span>% of the Amazon basin.</li>
-                            <li class="flex items-start gap-2"><span class="text-amazon-500 font-bold">Detection:</span> Sub-pixel Spectral Mixture Analysis (SMA) quantifying non-photosynthetic vegetation.</li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-amazon-500 font-bold flex-shrink-0">Trigger:</span>
+                                <span>Severe convective storms, squall lines, and microbursts.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-amazon-500 font-bold flex-shrink-0">Impact:</span>
+                                <span>Snaps and uproots canopy trees, causing up to <strong>95%</strong> mortality in extreme events.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-amazon-500 font-bold flex-shrink-0">Hotspots:</span>
+                                <span><strong>33%</strong> of detected events occur in just <strong>3%</strong> of the Amazon basin.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-amazon-500 font-bold flex-shrink-0">Detection:</span>
+                                <span>Sub-pixel Spectral Mixture Analysis (SMA) quantifying non-photosynthetic vegetation.</span>
+                            </li>
                         </ul>
                     </div>
                     
@@ -447,7 +475,7 @@
                         <p>Worryingly, the frequency of these events is escalating. Between 1985 and 2020, there has been a nearly fourfold increase in both the number of large windthrows (≥30 ha) and the total forest area they affect. This increase aligns with a long-term rise in extreme atmospheric instability (the top 95th percentile of afternoon Convective Available Potential Energy, or CAPE). The damage is highly concentrated; roughly 33% of all large events occur within specific "hotspot" regions in the central and western Amazon, which make up only ~3% of the basin's total area.</p>
                     </div>
 
-                    <div class="reveal">
+                    <div class="reveal reveal-right">
                         <h4 class="text-2xl font-bold text-gray-900 border-b-2 border-amazon-500 inline-block mb-4">Carbon Cycle & Biomass Recovery</h4>
                         <p class="mb-4">Intense windthrows instantly transfer enormous amounts of live aboveground biomass (AGB) into the dead wood pool (coarse woody debris), sometimes reducing local biomass by over 60%. As this necromass decomposes, it temporarily shifts affected patches of the forest from net carbon sinks to net carbon sources.</p>
                         <p>However, the capacity for biomass recovery varies drastically by region. In the highly productive Northwestern Amazon, forests exhibit remarkable resilience, recovering to >90% of old-growth biomass levels in approximately 20 years. This recovery rate is roughly 50% faster than that observed in the Central Amazon, suggesting that Northwestern forests may be evolutionarily adapted to more frequent and severe wind disturbances.</p>
@@ -460,7 +488,7 @@
                     </div>
 
                     <!-- 3D LIDAR HTML EMBED -->
-                    <div class="reveal my-14 clear-both">
+                    <div class="reveal reveal-right my-14 clear-both">
                         <h4 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                             <span>🌲</span> Interactive 3D Canopy Structure (LiDAR)
                         </h4>
@@ -487,7 +515,7 @@
                 </article>
 
                 <!-- References Section -->
-                <div class="reveal max-w-4xl mx-auto bg-gray-50 rounded-2xl p-8 sm:p-10 border border-gray-200 shadow-sm clear-both">
+                <div class="reveal reveal-right max-w-4xl mx-auto bg-gray-50 rounded-2xl p-8 sm:p-10 border border-gray-200 shadow-sm clear-both">
                     <h4 class="text-2xl font-serif font-bold text-gray-900 mb-8 flex items-center gap-3">
                         <svg class="w-6 h-6 text-amazon-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                         Foundation Literature
@@ -532,7 +560,7 @@
                 </div>
 
                 <!-- AI Chat Embed Container -->
-                <div class="reveal max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200" style="height: 650px;">
+                <div class="reveal reveal-right max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200" style="height: 650px;">
                     <iframe 
                         src="https://www.chatbase.co/chatbot-iframe/4464wtk8c6pr5x5dOrwdB" 
                         width="100%" 
@@ -556,7 +584,7 @@
                 </div>
 
                 <!-- Shiny App Link Box (Top) -->
-                <div class="reveal max-w-4xl mx-auto bg-amazon-50 rounded-2xl p-8 border border-amazon-100 flex flex-col md:flex-row items-center justify-between shadow-sm mb-16">
+                <div class="reveal reveal-right max-w-4xl mx-auto bg-amazon-50 rounded-2xl p-8 border border-amazon-100 flex flex-col md:flex-row items-center justify-between shadow-sm mb-16">
                     <div class="mb-6 md:mb-0 md:mr-8 text-center md:text-left">
                         <h4 class="text-xl font-bold text-gray-900 mb-2">Advanced Statistical Dashboard</h4>
                         <p class="text-gray-600 text-sm leading-relaxed">
@@ -569,7 +597,7 @@
                     </a>
                 </div>
                 
-                <!-- GEE App 2: Amazon Windthrow Explorer (Moved to Top) -->
+                <!-- GEE App 2: Amazon Windthrow Explorer -->
                 <div class="reveal">
                     <h4 class="text-xl font-bold text-gray-900 mb-4 text-center">Amazon Windthrow Explorer</h4>
                     <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto text-sm">Explore interactive spatial layers mapping forest disturbance and recovery dynamics across our primary study regions.</p>
@@ -589,8 +617,8 @@
                     </div>
                 </div>
 
-                <!-- GEE App 1: Windthrow Observatory (Moved to Bottom) -->
-                <div class="reveal">
+                <!-- GEE App 1: Windthrow Observatory -->
+                <div class="reveal reveal-right">
                     <h4 class="text-xl font-bold text-gray-900 mb-4 text-center border-t border-gray-200 pt-16">Wayra Windthrow Observatory</h4>
                     <div class="w-full bg-gray-100 rounded-xl mb-12 border border-gray-300 shadow-inner relative flex items-center justify-center" style="height: 750px;" id="gee-container">
                         <p id="gee-loading-text" class="text-gray-500 font-medium absolute z-0">Loading Earth Engine App...</p>
@@ -646,7 +674,7 @@
                     </div>
 
                     <!-- AndesFlux -->
-                    <div class="reveal delay-100 bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="reveal reveal-right delay-100 bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
                         <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-6">
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
                         </div>
@@ -698,7 +726,7 @@
                 </div>
 
                 <!-- Google My Maps Interactive Map -->
-                <div class="reveal max-w-5xl mx-auto mb-16">
+                <div class="reveal reveal-right max-w-5xl mx-auto mb-16">
                     <h4 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                         <svg class="w-6 h-6 text-amazon-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         Interactive Field Plot & Sensor Map
@@ -791,7 +819,7 @@
                     </li>
 
                     <!-- Paper 2 -->
-                    <li class="reveal delay-100 p-6 rounded-xl border border-gray-200 bg-white hover:border-amazon-300 hover:shadow-md transition-all">
+                    <li class="reveal reveal-right delay-100 p-6 rounded-xl border border-gray-200 bg-white hover:border-amazon-300 hover:shadow-md transition-all">
                         <h4 class="text-lg font-bold text-gray-900 mb-1">
                             <a href="https://iopscience.iop.org/article/10.1088/2752-664X/ae6784/meta" target="_blank" class="hover:text-amazon-700 transition-colors">Tracking Amazon forest succession after large-scale windthrow events</a>
                         </h4>
@@ -826,7 +854,7 @@
                     </li>
 
                     <!-- Paper 4 -->
-                    <li class="reveal delay-300 p-6 rounded-xl border border-gray-200 bg-white hover:border-amazon-300 hover:shadow-md transition-all">
+                    <li class="reveal reveal-right delay-300 p-6 rounded-xl border border-gray-200 bg-white hover:border-amazon-300 hover:shadow-md transition-all">
                         <h4 class="text-lg font-bold text-gray-900 mb-1">
                             <a href="https://iopscience.iop.org/article/10.1088/1748-9326/aabe9f/meta" target="_blank" class="hover:text-amazon-700 transition-colors">Vulnerability of Amazon forests to storm-driven tree mortality</a>
                         </h4>
@@ -855,7 +883,7 @@
                 </div>
 
                 <!-- FILTER BUTTONS -->
-                <div class="reveal flex flex-wrap justify-center gap-3 mb-16" id="team-filters">
+                <div class="reveal reveal-right flex flex-wrap justify-center gap-3 mb-16" id="team-filters">
                     <button class="filter-btn bg-amazon-700 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors shadow-sm" data-filter="all">All Specialties</button>
                     <button class="filter-btn bg-gray-100 text-gray-700 hover:bg-gray-200 px-5 py-2 rounded-full text-sm font-medium transition-colors" data-filter="forest-inventory">Forest Inventory</button>
                     <button class="filter-btn bg-gray-100 text-gray-700 hover:bg-gray-200 px-5 py-2 rounded-full text-sm font-medium transition-colors" data-filter="drone-survey">Drone Survey</button>
@@ -890,7 +918,7 @@
                     </div>
 
                     <!-- Profile: Susan Trumbore -->
-                    <div class="reveal delay-100 team-member bg-gray-50 rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-md flex flex-col md:flex-row gap-6 items-start" data-roles="atmosphere-science">
+                    <div class="reveal reveal-right delay-100 team-member bg-gray-50 rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-md flex flex-col md:flex-row gap-6 items-start" data-roles="atmosphere-science">
                         <img src="https://www.bgc-jena.mpg.de/employee_images/121811-1778575748?t=ZXlKM2FXUjBhQ0k2TkRJMkxDSm9aV2xuYUhRaU9qVTBPQ3dpWm1sMElqb2lZM0p2Y0NJc0ltWnBiR1ZmWlhoMFpXNXphVzl1SWpvaWQyVmljQ0o5LS0yNzY0NmFiNGYzMGU3ZmVkY2YzZjAzZWJkMzYwNTY1NjE3ODI1YTFj" alt="Susan Trumbore" class="w-40 h-40 md:w-48 md:h-48 rounded-xl object-cover shadow-sm flex-shrink-0" onerror="this.src='https://ui-avatars.com/api/?name=Susan+Trumbore&background=0284c7&color=fff&size=200'">
                         <div>
                             <h4 class="text-xl font-bold text-gray-900">Susan Trumbore</h4>
@@ -925,7 +953,7 @@
                     </div>
 
                     <!-- Profile: Robinson Negron -->
-                    <div class="reveal delay-100 team-member bg-gray-50 rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-md flex flex-col md:flex-row gap-6 items-start" data-roles="atmosphere-science data-science">
+                    <div class="reveal reveal-right delay-100 team-member bg-gray-50 rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-md flex flex-col md:flex-row gap-6 items-start" data-roles="atmosphere-science data-science">
                         <img src="https://profiles.lbl.gov/22873-robinson-negronjuarez/thumbnail" alt="Robinson Negron" class="w-40 h-40 md:w-48 md:h-48 rounded-xl object-cover shadow-sm flex-shrink-0" onerror="this.src='https://ui-avatars.com/api/?name=Robinson+Negron&background=4f46e5&color=fff&size=200'">
                         <div>
                             <h4 class="text-xl font-bold text-gray-900">Robinson Negrón-Juárez</h4>
@@ -969,7 +997,7 @@
                         </div>
                     </div>
                     <!-- Collaborator 2 -->
-                    <div class="reveal delay-200 team-member bg-gray-50 border border-gray-200 rounded-xl p-6 text-center shadow-sm hover:shadow-md" data-roles="forest-inventory">
+                    <div class="reveal reveal-right delay-200 team-member bg-gray-50 border border-gray-200 rounded-xl p-6 text-center shadow-sm hover:shadow-md" data-roles="forest-inventory">
                         <img src="https://i1.rgstatic.net/ii/profile.image/601266191364097-1520364439265_Q128/Rodil-Tello-Espinoza.jpg" alt="Rodil Tello" class="w-32 h-32 rounded-full mx-auto mb-4 border-2 border-gray-200 object-cover">
                         <h5 class="text-lg font-bold text-gray-900">Rodil Tello</h5>
                         <p class="text-sm text-amazon-700 font-medium mb-1">Research Collaborator</p>
@@ -999,7 +1027,7 @@
                         </div>
                     </div>
                     <!-- Collaborator 5 -->
-                    <div class="reveal delay-200 team-member bg-gray-50 border border-gray-200 rounded-xl p-6 text-center shadow-sm hover:shadow-md" data-roles="drone-survey">
+                    <div class="reveal reveal-right delay-200 team-member bg-gray-50 border border-gray-200 rounded-xl p-6 text-center shadow-sm hover:shadow-md" data-roles="drone-survey">
                         <img src="http://servicosweb.cnpq.br/wspessoa/servletrecuperafoto?tipo=1&id=K8173337E4" alt="Adriana Simonetti Lopes Peixoto" class="w-32 h-32 rounded-full mx-auto mb-4 border-2 border-gray-200 object-cover">
                         <h5 class="text-lg font-bold text-gray-900">Adriana Simonetti Lopes Peixoto</h5>
                         <p class="text-sm text-amazon-700 font-medium mb-1">Research Collaborator</p>
@@ -1030,7 +1058,7 @@
                         </div>
                     </div>
                     <!-- Collaborator 8 -->
-                    <div class="reveal delay-200 team-member bg-gray-50 border border-gray-200 rounded-xl p-6 text-center shadow-sm hover:shadow-md" data-roles="drone-survey">
+                    <div class="reveal reveal-right delay-200 team-member bg-gray-50 border border-gray-200 rounded-xl p-6 text-center shadow-sm hover:shadow-md" data-roles="drone-survey">
                         <img src="https://i1.rgstatic.net/ii/profile.image/11431282428851846-1790787324141_Q128/Jhostin-Rengifo-Yumbato.jpg" alt="Jhostin Rengifo" class="w-32 h-32 rounded-full mx-auto mb-4 border-2 border-gray-200 object-cover">
                         <h5 class="text-lg font-bold text-gray-900">Jhostin Rengifo</h5>
                         <p class="text-sm text-amazon-700 font-medium mb-1">Research Collaborator</p>
@@ -1060,7 +1088,7 @@
                         </div>
                     </div>
                     <!-- Collaborator 11 -->
-                    <div class="reveal delay-200 team-member bg-gray-50 border border-gray-200 rounded-xl p-6 text-center shadow-sm hover:shadow-md" data-roles="drone-survey">
+                    <div class="reveal reveal-right delay-200 team-member bg-gray-50 border border-gray-200 rounded-xl p-6 text-center shadow-sm hover:shadow-md" data-roles="drone-survey">
                         <img src="https://ui-avatars.com/api/?name=Alan+Mosquera&background=f3f4f6&color=374151&size=150" alt="Alan Mosquera" class="w-32 h-32 rounded-full mx-auto mb-4 border-2 border-gray-200 object-cover">
                         <h5 class="text-lg font-bold text-gray-900">Alan Mosquera</h5>
                         <p class="text-sm text-amazon-700 font-medium mb-1">Research Collaborator</p>
@@ -1122,7 +1150,7 @@
                     </div>
 
                     <!-- Contact Form (Visual) -->
-                    <div class="reveal delay-100 bg-white rounded-2xl p-8 border border-gray-200 shadow-sm">
+                    <div class="reveal reveal-right delay-100 bg-white rounded-2xl p-8 border border-gray-200 shadow-sm">
                         <form action="mailto:jurquiza@bgc-jena.mpg.de" method="POST" enctype="text/plain" class="space-y-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
@@ -1177,12 +1205,12 @@
         </div>
     </footer>
 
-    <!-- Interactive Scripts for SPA, Slow Bidirectional Scroll Reveal, Steady Counters, and APIs -->
+    <!-- Interactive Scripts for SPA, Horizontal Scroll Reveal, Steady Counters, and APIs -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
             // ==========================================
-            // 1. Slow & Steady Counter Functions (3.8 seconds)
+            // 1. Slow & Steady Counter Functions (3.5 seconds)
             // ==========================================
             function animateCounter(el) {
                 const target = parseInt(el.getAttribute('data-target'), 10);
@@ -1192,13 +1220,12 @@
                     cancelAnimationFrame(el._rafId);
                 }
 
-                const duration = 3800; // 3.8 seconds for a relaxed, noticeable count
+                const duration = 3500;
                 const startTime = performance.now();
 
                 function updateCount(currentTime) {
                     const elapsed = currentTime - startTime;
                     const progress = Math.min(elapsed / duration, 1);
-                    // Gentle quadratic ease-out so numbers climb steadily instead of jumping at the start
                     const easeOut = 1 - Math.pow(1 - progress, 2);
                     const currentVal = Math.floor(easeOut * target);
 
@@ -1226,20 +1253,20 @@
             }
 
             // ==========================================
-            // 2. Bidirectional Scroll Reveal & Count-Up Observers
+            // 2. Bidirectional Horizontal Reveal & Count-Up Observers
             // ==========================================
             const revealElements = document.querySelectorAll('.reveal');
             const revealObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
+                    if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                    } else if (!entry.isIntersecting) {
+                    } else {
                         entry.target.classList.remove('active');
                     }
                 });
             }, {
-                threshold: [0, 0.12],
-                rootMargin: "0px 0px -25px 0px"
+                threshold: 0.05,
+                rootMargin: "0px 0px -15px 0px"
             });
 
             revealElements.forEach(el => revealObserver.observe(el));
@@ -1247,21 +1274,43 @@
             const counters = document.querySelectorAll('.count-up');
             const countObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
+                    if (entry.isIntersecting) {
                         if (entry.target.dataset.isCounting !== 'true') {
                             entry.target.dataset.isCounting = 'true';
                             animateCounter(entry.target);
                         }
-                    } else if (!entry.isIntersecting) {
+                    } else {
                         entry.target.dataset.isCounting = 'false';
                         resetCounter(entry.target);
                     }
                 });
             }, {
-                threshold: [0, 0.25]
+                threshold: 0.15
             });
 
             counters.forEach(counter => countObserver.observe(counter));
+
+            // Helper: Force-check elements currently in the viewport when switching tabs at the top
+            function triggerVisibleInView(viewEl) {
+                requestAnimationFrame(() => {
+                    const winH = window.innerHeight || document.documentElement.clientHeight;
+                    viewEl.querySelectorAll('.reveal').forEach(el => {
+                        const rect = el.getBoundingClientRect();
+                        if (rect.top < winH - 15 && rect.bottom > 0) {
+                            el.classList.add('active');
+                        }
+                    });
+                    viewEl.querySelectorAll('.count-up').forEach(el => {
+                        const rect = el.getBoundingClientRect();
+                        if (rect.top < winH && rect.bottom > 0) {
+                            if (el.dataset.isCounting !== 'true') {
+                                el.dataset.isCounting = 'true';
+                                animateCounter(el);
+                            }
+                        }
+                    });
+                });
+            }
 
             // ==========================================
             // 3. SPA View Switching Logic
@@ -1270,7 +1319,6 @@
             const navButtons = document.querySelectorAll('.nav-btn, .nav-link');
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileMenuBtn = document.getElementById('mobile-menu-button');
-            const navbar = document.getElementById('navbar');
 
             function switchView(targetId) {
                 views.forEach(view => {
@@ -1286,18 +1334,13 @@
                 if (targetView) {
                     targetView.classList.add('active');
                     
-                    if (targetId === 'home') {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    } else {
-                        setTimeout(() => {
-                            const contentBox = targetView.querySelector('.max-w-7xl, .max-w-5xl, .max-w-4xl, .text-center');
-                            if (contentBox) {
-                                const navHeight = navbar.offsetHeight;
-                                const topPosition = contentBox.getBoundingClientRect().top + window.scrollY - navHeight - 20;
-                                window.scrollTo({ top: topPosition, behavior: 'smooth' });
-                            }
-                        }, 10);
-                    }
+                    // Scroll cleanly to the top so the user sees the header of the new tab
+                    window.scrollTo({ top: 0, behavior: 'auto' });
+
+                    // Immediately reveal elements visible at the top of the newly opened tab
+                    setTimeout(() => {
+                        triggerVisibleInView(targetView);
+                    }, 40);
                     
                     if (targetId === 'apps') {
                         const geeFrame = document.getElementById('gee-app-frame');
@@ -1421,7 +1464,7 @@
             });
 
             // ==========================================
-            // 5. Zenodo API Fetch Logic (with Slow Count-Up)
+            // 5. Zenodo API Fetch Logic (with Steady Count-Up)
             // ==========================================
             const viewsEl = document.getElementById('zenodo-views');
             const downloadsEl = document.getElementById('zenodo-downloads');
