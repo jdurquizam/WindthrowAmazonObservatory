@@ -68,16 +68,20 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Scroll Reveal Animations */
+        /* Dynamic Bidirectional Scroll Reveal Animations */
         .reveal {
             opacity: 0;
-            transform: translateY(35px);
-            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-            will-change: opacity, transform;
+            transform: translateY(45px) scale(0.95);
+            filter: blur(4px);
+            transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform, filter;
         }
         .reveal.active {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
+            filter: blur(0px);
         }
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
@@ -139,7 +143,9 @@
 
         /* Filter Transition */
         .team-member {
-            transition: opacity 0.3s ease-in-out, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
         }
     </style>
 </head>
@@ -739,14 +745,14 @@
                         <div class="bg-white border border-gray-200 rounded-xl p-4 flex gap-8">
                             <div>
                                 <span class="block text-xs font-bold text-gray-500 uppercase mb-1">Live Views</span>
-                                <span id="zenodo-views" class="text-xl font-bold text-amazon-700 flex items-center">
+                                <span id="zenodo-views" class="count-up text-xl font-bold text-amazon-700 flex items-center">
                                     Loading...
                                 </span>
                             </div>
                             <div class="w-px bg-gray-200"></div>
                             <div>
                                 <span class="block text-xs font-bold text-gray-500 uppercase mb-1">Live Downloads</span>
-                                <span id="zenodo-downloads" class="text-xl font-bold text-amazon-700 flex items-center">
+                                <span id="zenodo-downloads" class="count-up text-xl font-bold text-amazon-700 flex items-center">
                                     Loading...
                                 </span>
                             </div>
@@ -1171,66 +1177,93 @@
         </div>
     </footer>
 
-    <!-- Interactive Scripts for SPA, Scrolling, Animations, and APIs -->
+    <!-- Interactive Scripts for SPA, Bidirectional Scroll Reveal, Dynamic Counters, and APIs -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
             // ==========================================
-            // 1. Helper Function for Number Count-Up
+            // 1. Dynamic Counter Functions (Count-Up & Reset)
             // ==========================================
             function animateCounter(el) {
-                if (el.dataset.animated === 'true') return;
                 const target = parseInt(el.getAttribute('data-target'), 10);
                 if (isNaN(target)) return;
 
-                el.dataset.animated = 'true';
-                const duration = 2000; // 2 seconds
+                // Cancel any previous animation frame on this element
+                if (el._rafId) {
+                    cancelAnimationFrame(el._rafId);
+                }
+
+                const duration = 1800; // 1.8 seconds smooth count
                 const startTime = performance.now();
 
                 function updateCount(currentTime) {
                     const elapsed = currentTime - startTime;
                     const progress = Math.min(elapsed / duration, 1);
-                    // Ease-out cubic curve for smooth deceleration at the end
-                    const easeOut = 1 - Math.pow(1 - progress, 3);
+                    // Ease-out expo curve for a fast start and smooth finish
+                    const easeOut = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
                     const currentVal = Math.floor(easeOut * target);
 
                     el.innerText = currentVal.toLocaleString();
 
                     if (progress < 1) {
-                        requestAnimationFrame(updateCount);
+                        el._rafId = requestAnimationFrame(updateCount);
                     } else {
                         el.innerText = target.toLocaleString();
+                        el._rafId = null;
                     }
                 }
 
-                requestAnimationFrame(updateCount);
+                el._rafId = requestAnimationFrame(updateCount);
+            }
+
+            function resetCounter(el) {
+                if (el._rafId) {
+                    cancelAnimationFrame(el._rafId);
+                    el._rafId = null;
+                }
+                if (el.hasAttribute('data-target')) {
+                    el.innerText = '0';
+                }
             }
 
             // ==========================================
-            // 2. Scroll Reveal & Count-Up Observers
+            // 2. Bidirectional Scroll Reveal & Count-Up Observers
             // ==========================================
             const revealElements = document.querySelectorAll('.reveal');
-            const revealObserver = new IntersectionObserver((entries, observer) => {
+            const revealObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (!entry.isIntersecting) return;
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
+                        // Element enters screen -> Show with animation
+                        entry.target.classList.add('active');
+                    } else if (!entry.isIntersecting) {
+                        // Element completely leaves screen -> Hide so it re-animates next time
+                        entry.target.classList.remove('active');
+                    }
                 });
             }, {
-                threshold: 0.12,
-                rootMargin: "0px 0px -40px 0px"
+                threshold: [0, 0.12],
+                rootMargin: "0px 0px -20px 0px"
             });
 
             revealElements.forEach(el => revealObserver.observe(el));
 
             const counters = document.querySelectorAll('.count-up');
-            const countObserver = new IntersectionObserver((entries, observer) => {
+            const countObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (!entry.isIntersecting) return;
-                    animateCounter(entry.target);
-                    observer.unobserve(entry.target);
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
+                        if (entry.target.dataset.isCounting !== 'true') {
+                            entry.target.dataset.isCounting = 'true';
+                            animateCounter(entry.target);
+                        }
+                    } else if (!entry.isIntersecting) {
+                        // Reset counter when out of screen so it counts up again on return
+                        entry.target.dataset.isCounting = 'false';
+                        resetCounter(entry.target);
+                    }
                 });
-            }, { threshold: 0.4 });
+            }, {
+                threshold: [0, 0.25]
+            });
 
             counters.forEach(counter => countObserver.observe(counter));
 
@@ -1246,6 +1279,12 @@
             function switchView(targetId) {
                 views.forEach(view => {
                     view.classList.remove('active');
+                    // Reset reveal and counter states in hidden views so they animate freshly when opened
+                    view.querySelectorAll('.reveal').forEach(el => el.classList.remove('active'));
+                    view.querySelectorAll('.count-up').forEach(el => {
+                        el.dataset.isCounting = 'false';
+                        resetCounter(el);
+                    });
                 });
                 
                 const targetView = document.getElementById(targetId);
@@ -1375,15 +1414,21 @@
                         const roles = member.getAttribute('data-roles') || '';
                         if (filterValue === 'all' || roles.includes(filterValue)) {
                             member.style.display = '';
+                            // Trigger smooth reveal animation on filtered items
+                            member.classList.remove('active');
+                            requestAnimationFrame(() => {
+                                requestAnimationFrame(() => member.classList.add('active'));
+                            });
                         } else {
                             member.style.display = 'none';
+                            member.classList.remove('active');
                         }
                     });
                 });
             });
 
             // ==========================================
-            // 5. Zenodo API Fetch Logic (with Count-Up)
+            // 5. Zenodo API Fetch Logic (with Dynamic Count-Up)
             // ==========================================
             const viewsEl = document.getElementById('zenodo-views');
             const downloadsEl = document.getElementById('zenodo-downloads');
