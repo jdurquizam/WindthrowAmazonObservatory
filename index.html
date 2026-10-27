@@ -196,20 +196,32 @@
                     <button class="nav-btn text-sm font-medium text-gray-600 hover:text-amazon-700 transition-colors" data-target="team" data-i18n="nav_team">Team</button>
                     <button class="nav-btn text-sm font-medium text-gray-600 hover:text-amazon-700 transition-colors" data-target="contact" data-i18n="nav_contact">Contact</button>
 
-                    <!-- Language Switcher (EN | ES | PT) -->
-                    <div class="flex items-center bg-gray-100 rounded-full p-1 border border-gray-200 ml-2">
-                        <button class="lang-btn px-2.5 py-1 rounded-full text-xs font-bold bg-amazon-700 text-white transition-all" data-lang="en">EN</button>
-                        <button class="lang-btn px-2.5 py-1 rounded-full text-xs font-bold text-gray-600 hover:text-amazon-700 transition-all" data-lang="es">ES</button>
-                        <button class="lang-btn px-2.5 py-1 rounded-full text-xs font-bold text-gray-600 hover:text-amazon-700 transition-all" data-lang="pt">PT</button>
+                    <!-- Language Switcher (Flags: EN | ES | PT) -->
+                    <div class="flex items-center bg-gray-100/90 rounded-full p-1 border border-gray-200 ml-2 gap-1.5 shadow-inner">
+                        <button class="lang-btn p-0.5 rounded-full transition-all duration-300" data-lang="en" title="English">
+                            <img src="https://flagcdn.com/w40/gb.png" alt="English" class="w-6 h-6 rounded-full object-cover">
+                        </button>
+                        <button class="lang-btn p-0.5 rounded-full transition-all duration-300" data-lang="es" title="Español">
+                            <img src="https://flagcdn.com/w40/pe.png" alt="Español" class="w-6 h-6 rounded-full object-cover">
+                        </button>
+                        <button class="lang-btn p-0.5 rounded-full transition-all duration-300" data-lang="pt" title="Português">
+                            <img src="https://flagcdn.com/w40/br.png" alt="Português" class="w-6 h-6 rounded-full object-cover">
+                        </button>
                     </div>
                 </div>
 
-                <!-- Mobile Menu & Language Button -->
+                <!-- Mobile Menu & Language Button (Flags) -->
                 <div class="flex items-center gap-2 md:hidden">
-                    <div class="flex items-center bg-gray-100 rounded-full p-0.5 border border-gray-200">
-                        <button class="lang-btn px-2 py-1 rounded-full text-[0.7rem] font-bold bg-amazon-700 text-white" data-lang="en">EN</button>
-                        <button class="lang-btn px-2 py-1 rounded-full text-[0.7rem] font-bold text-gray-600" data-lang="es">ES</button>
-                        <button class="lang-btn px-2 py-1 rounded-full text-[0.7rem] font-bold text-gray-600" data-lang="pt">PT</button>
+                    <div class="flex items-center bg-gray-100 rounded-full p-1 border border-gray-200 gap-1">
+                        <button class="lang-btn p-0.5 rounded-full transition-all duration-300" data-lang="en" title="English">
+                            <img src="https://flagcdn.com/w40/gb.png" alt="EN" class="w-5 h-5 rounded-full object-cover">
+                        </button>
+                        <button class="lang-btn p-0.5 rounded-full transition-all duration-300" data-lang="es" title="Español">
+                            <img src="https://flagcdn.com/w40/pe.png" alt="ES" class="w-5 h-5 rounded-full object-cover">
+                        </button>
+                        <button class="lang-btn p-0.5 rounded-full transition-all duration-300" data-lang="pt" title="Português">
+                            <img src="https://flagcdn.com/w40/br.png" alt="PT" class="w-5 h-5 rounded-full object-cover">
+                        </button>
                     </div>
                     <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-amazon-700 focus:outline-none">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -739,7 +751,7 @@
                     </p>
                 </div>
 
-                <!-- NEW: SUPER FAST CITIZEN SCIENCE MODULE -->
+                <!-- SUPER FAST CITIZEN SCIENCE MODULE -->
                 <div id="citizen-science-box" class="reveal max-w-5xl mx-auto mb-16 bg-gradient-to-br from-amazon-950 via-amazon-900 to-amazon-800 text-white rounded-2xl p-6 sm:p-10 shadow-xl border border-amazon-700">
                     <div class="flex flex-col lg:flex-row gap-8 items-start">
                         <!-- Left explanation -->
@@ -1309,7 +1321,7 @@
         </div>
     </footer>
 
-    <!-- Interactive Scripts for SPA, Trilingual i18n, Citizen Science, Scroll Reveal, and APIs -->
+    <!-- Interactive Scripts for SPA, Flag i18n, Citizen Science, Scroll Reveal, and APIs -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
@@ -1684,11 +1696,11 @@
 
                 document.querySelectorAll('.lang-btn').forEach(btn => {
                     if (btn.getAttribute('data-lang') === lang) {
-                        btn.classList.add('bg-amazon-700', 'text-white');
-                        btn.classList.remove('text-gray-600');
+                        btn.classList.add('ring-2', 'ring-amazon-700', 'bg-white', 'scale-110', 'opacity-100', 'shadow-sm');
+                        btn.classList.remove('opacity-50', 'hover:opacity-90');
                     } else {
-                        btn.classList.remove('bg-amazon-700', 'text-white');
-                        btn.classList.add('text-gray-600');
+                        btn.classList.remove('ring-2', 'ring-amazon-700', 'bg-white', 'scale-110', 'opacity-100', 'shadow-sm');
+                        btn.classList.add('opacity-50', 'hover:opacity-90');
                     }
                 });
             }
