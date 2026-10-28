@@ -478,7 +478,7 @@
             </div>
         </section>
 
-        <!-- View: STATE OF THE ART (Dark Mode + 100% Translated EN / ES / PT) -->
+        <!-- View: STATE OF THE ART (Dark Mode + 100% Translated EN / ES / PT + White LiDAR Border Removed) -->
         <section id="stateoftheart" class="view-section py-20 bg-gray-950 min-h-[calc(100vh-5rem)]">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 
@@ -537,21 +537,19 @@
                         <p data-i18n="sota_p3_2">During the first decade of recovery, EVI steadily increases, often peaking at 20% above the levels of undisturbed old-growth forest. This elevated optical signature reflects the rapid colonization of fast-growing pioneer species, which possess highly reflective, broad leaves. As the forest matures over the next 15 to 30 years, longer-lived, late-successional species begin to dominate and form complex, multi-layered canopies, causing the EVI signal to gradually dampen and decline.</p>
                     </div>
 
-                   <!-- 3D LIDAR HTML EMBED (Sin bordes gruesos) -->
+                    <!-- 3D LIDAR HTML EMBED (White R htmlwidgets padding automatically stripped/cropped) -->
                     <div class="reveal reveal-right my-14 clear-both">
                         <h4 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
                             <span>🌲</span> <span data-i18n="sota_lidar_title">Interactive 3D Canopy Structure (LiDAR)</span>
                         </h4>
-                        <div class="w-full bg-[#031c0d] rounded-2xl shadow-2xl overflow-hidden relative flex items-center justify-center" style="height: 600px;" id="lidar-container">
+                        <div class="w-full bg-[#031c0d] rounded-2xl border border-amazon-900/60 shadow-2xl overflow-hidden relative flex items-center justify-center" style="height: 600px;" id="lidar-container">
                             <p id="lidar-loading-text" class="text-gray-400 font-medium absolute z-0" data-i18n="sota_lidar_loading">Loading 3D LiDAR Model...</p>
                             <iframe 
                                 id="lidar-frame"
-                                width="100%" 
-                                height="100%" 
-                                frameborder="0" 
                                 scrolling="no"
-                                style="border: 0 !important; outline: none !important; overflow: hidden;"
-                                class="absolute z-10 bg-transparent">
+                                frameborder="0" 
+                                style="border: 0 !important; outline: none !important; width: calc(100% + 90px); height: calc(100% + 90px); margin: -45px; background-color: #031c0d;"
+                                class="absolute z-10">
                             </iframe>
                         </div>
                         <p class="text-sm text-gray-400 mt-3 text-center" data-i18n="sota_lidar_help">Left-click and drag to rotate • Scroll to zoom • Right-click to pan</p>
@@ -1322,7 +1320,7 @@
         </div>
     </footer>
 
-    <!-- Interactive Scripts for SPA, Complete Flag i18n, Citizen Science, Scroll Reveal, and APIs -->
+    <!-- Interactive Scripts for SPA, Complete Flag i18n, Citizen Science, Scroll Reveal, LiDAR Fix, and APIs -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
@@ -2153,6 +2151,7 @@
                         }
                     }
                     
+                    // Load 3D LiDAR and automatically strip R htmlwidgets white 40px padding
                     if (targetId === 'stateoftheart') {
                         const lidarFrame = document.getElementById('lidar-frame');
                         if (lidarFrame && !lidarFrame.src) {
@@ -2160,6 +2159,40 @@
                             lidarFrame.onload = function() {
                                 const loadingText = document.getElementById('lidar-loading-text');
                                 if(loadingText) loadingText.style.display = 'none';
+
+                                try {
+                                    const innerDoc = lidarFrame.contentDocument || lidarFrame.contentWindow.document;
+                                    if (innerDoc && innerDoc.body) {
+                                        // Reset iframe negative margins since we have direct DOM access
+                                        lidarFrame.style.width = '100%';
+                                        lidarFrame.style.height = '100%';
+                                        lidarFrame.style.margin = '0px';
+
+                                        innerDoc.body.style.backgroundColor = '#031c0d';
+                                        innerDoc.body.style.margin = '0px';
+                                        innerDoc.body.style.padding = '0px';
+                                        innerDoc.body.style.overflow = 'hidden';
+
+                                        if (innerDoc.documentElement) {
+                                            innerDoc.documentElement.style.backgroundColor = '#031c0d';
+                                        }
+
+                                        const widgetContainer = innerDoc.getElementById('htmlwidget_container');
+                                        if (widgetContainer) {
+                                            widgetContainer.style.left = '0px';
+                                            widgetContainer.style.right = '0px';
+                                            widgetContainer.style.top = '0px';
+                                            widgetContainer.style.bottom = '0px';
+                                        }
+
+                                        if (lidarFrame.contentWindow) {
+                                            lidarFrame.contentWindow.dispatchEvent(new Event('resize'));
+                                        }
+                                    }
+                                } catch (e) {
+                                    // If opened via local file:// where browser blocks contentDocument,
+                                    // the CSS calc(100% + 90px) and margin: -45px on #lidar-frame automatically crops out the 40px white border.
+                                }
                             };
                         }
                     }
