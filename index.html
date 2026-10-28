@@ -133,7 +133,7 @@
             backdrop-filter: blur(12px);
         }
         
-        /* Partners Carousel CSS (Adapted for Dark Mode legibility) */
+        /* Partners Carousel CSS (Clickable & Pauses on Hover) */
         .partners-carousel {
             overflow: hidden;
             white-space: nowrap;
@@ -148,19 +148,30 @@
             animation: marquee 45s linear infinite;
             align-items: center;
         }
+        .partners-track:hover {
+            animation-play-state: paused;
+        }
+        .partners-track a {
+            display: inline-flex;
+            align-items: center;
+            margin: 0 35px;
+            border-radius: 12px;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
         .partners-track img {
             height: 85px;
-            margin: 0 35px;
             padding: 8px 14px;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
             object-fit: contain;
-            transition: all 0.4s ease;
+            transition: all 0.35s ease;
+            cursor: pointer;
         }
-        .partners-track img:hover {
-            transform: scale(1.06);
+        .partners-track a:hover img {
+            transform: scale(1.07);
             background: #ffffff;
+            box-shadow: 0 0 20px rgba(74, 222, 128, 0.45);
         }
         @keyframes marquee {
             0% { transform: translateX(0); }
@@ -210,21 +221,20 @@
                     </a>
                 </div>
                 
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-3 lg:space-x-5">
+                <!-- Desktop Menu (Compact: Data, Citizen Science & Contact merged) -->
+                <div class="hidden md:flex items-center space-x-4 lg:space-x-6">
                     <button class="nav-btn text-sm font-medium text-gray-300 hover:text-amazon-400 transition-colors" data-target="home" data-i18n="nav_home">Home</button>
                     <button class="nav-btn text-sm font-medium text-gray-300 hover:text-amazon-400 transition-colors" data-target="stateoftheart" data-i18n="nav_sota">State of the Art</button>
                     <button class="nav-btn text-sm font-medium text-gray-300 hover:text-amazon-400 transition-colors" data-target="apps" data-i18n="nav_apps">Apps</button>
                     <button class="nav-btn text-sm font-medium text-gray-300 hover:text-amazon-400 transition-colors" data-target="fluxtowers" data-i18n="nav_flux">Flux Towers</button>
-                    <button class="nav-btn text-sm font-medium text-gray-300 hover:text-amazon-400 transition-colors" data-target="data" data-i18n="nav_data">Data & Citizen Science</button>
                     <button class="nav-btn text-sm font-medium text-gray-300 hover:text-amazon-400 transition-colors" data-target="publications" data-i18n="nav_pubs">Publications</button>
                     <button class="nav-btn text-sm font-medium text-gray-300 hover:text-amazon-400 transition-colors" data-target="team" data-i18n="nav_team">Team</button>
-                    <button class="nav-btn text-sm font-medium text-gray-300 hover:text-amazon-400 transition-colors" data-target="contact" data-i18n="nav_contact">Contact</button>
+                    <button class="nav-btn text-sm font-medium text-gray-300 hover:text-amazon-400 transition-colors" data-target="data" data-i18n="nav_data">Data & Contact</button>
 
-                    <!-- Language Switcher (Flags: EN | ES | PT) -->
+                    <!-- Language Switcher (Flags: US | PE | BR | DE) -->
                     <div class="flex items-center bg-gray-900/90 rounded-full p-1 border border-gray-700/80 ml-2 gap-1.5 shadow-inner">
                         <button class="lang-btn p-0.5 rounded-full transition-all duration-300" data-lang="en" title="English">
-                            <img src="https://flagcdn.com/w40/gb.png" alt="English" class="w-6 h-6 rounded-full object-cover">
+                            <img src="https://flagcdn.com/w40/us.png" alt="English" class="w-6 h-6 rounded-full object-cover">
                         </button>
                         <button class="lang-btn p-0.5 rounded-full transition-all duration-300" data-lang="es" title="Español">
                             <img src="https://flagcdn.com/w40/pe.png" alt="Español" class="w-6 h-6 rounded-full object-cover">
@@ -232,20 +242,26 @@
                         <button class="lang-btn p-0.5 rounded-full transition-all duration-300" data-lang="pt" title="Português">
                             <img src="https://flagcdn.com/w40/br.png" alt="Português" class="w-6 h-6 rounded-full object-cover">
                         </button>
+                        <button class="lang-btn p-0.5 rounded-full transition-all duration-300" data-lang="de" title="Deutsch">
+                            <img src="https://flagcdn.com/w40/de.png" alt="Deutsch" class="w-6 h-6 rounded-full object-cover">
+                        </button>
                     </div>
                 </div>
 
-                <!-- Mobile Menu & Language Button (Flags) -->
+                <!-- Mobile Menu & Language Button (Flags: US | PE | BR | DE) -->
                 <div class="flex items-center gap-2 md:hidden">
                     <div class="flex items-center bg-gray-900 rounded-full p-1 border border-gray-700 gap-1">
                         <button class="lang-btn p-0.5 rounded-full transition-all duration-300" data-lang="en" title="English">
-                            <img src="https://flagcdn.com/w40/gb.png" alt="EN" class="w-5 h-5 rounded-full object-cover">
+                            <img src="https://flagcdn.com/w40/us.png" alt="EN" class="w-5 h-5 rounded-full object-cover">
                         </button>
                         <button class="lang-btn p-0.5 rounded-full transition-all duration-300" data-lang="es" title="Español">
                             <img src="https://flagcdn.com/w40/pe.png" alt="ES" class="w-5 h-5 rounded-full object-cover">
                         </button>
                         <button class="lang-btn p-0.5 rounded-full transition-all duration-300" data-lang="pt" title="Português">
                             <img src="https://flagcdn.com/w40/br.png" alt="PT" class="w-5 h-5 rounded-full object-cover">
+                        </button>
+                        <button class="lang-btn p-0.5 rounded-full transition-all duration-300" data-lang="de" title="Deutsch">
+                            <img src="https://flagcdn.com/w40/de.png" alt="DE" class="w-5 h-5 rounded-full object-cover">
                         </button>
                     </div>
                     <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-amazon-400 focus:outline-none">
@@ -264,10 +280,9 @@
                 <button class="nav-btn block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-amazon-400 hover:bg-gray-800/60" data-target="stateoftheart" data-i18n="nav_sota">State of the Art</button>
                 <button class="nav-btn block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-amazon-400 hover:bg-gray-800/60" data-target="apps" data-i18n="nav_apps">Apps</button>
                 <button class="nav-btn block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-amazon-400 hover:bg-gray-800/60" data-target="fluxtowers" data-i18n="nav_flux">Flux Towers</button>
-                <button class="nav-btn block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-amazon-400 hover:bg-gray-800/60" data-target="data" data-i18n="nav_data">Data & Citizen Science</button>
                 <button class="nav-btn block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-amazon-400 hover:bg-gray-800/60" data-target="publications" data-i18n="nav_pubs">Publications</button>
                 <button class="nav-btn block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-amazon-400 hover:bg-gray-800/60" data-target="team" data-i18n="nav_team">Team</button>
-                <button class="nav-btn block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-amazon-400 hover:bg-gray-800/60" data-target="contact" data-i18n="nav_contact">Contact</button>
+                <button class="nav-btn block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-amazon-400 hover:bg-gray-800/60" data-target="data" data-i18n="nav_data">Data & Contact</button>
             </div>
         </div>
     </nav>
@@ -453,24 +468,44 @@
                     </script>
                 </div>
 
-                <!-- Partner Carousel -->
+                <!-- Partner Carousel (Clickable Official Institution Links) -->
                 <div class="reveal pt-8 border-t border-white/15">
                     <p class="text-center text-xs font-semibold tracking-widest text-amazon-300 uppercase mb-6 opacity-90" data-i18n="partners_title">Our Partners & Institutional Affiliations</p>
                     <div class="partners-carousel">
                         <div class="partners-track">
-                            <!-- Set 1: Your actual logos -->
-                            <img src="unap_logo.jpg" alt="UNAP">
-                            <img src="mpi_Logo.png" alt="Max Planck Institute for Biogeochemistry">
-                            <img src="inpalogo.jpg" alt="INPA">
-                            <img src="lbl.png" alt="Berkeley Lab">
-                            <img src="Logo_eng_RGB.jpg" alt="Julius Kühn Institute (JKI) Institute for Forest Protection">
+                            <!-- Set 1: Official Institutional Links -->
+                            <a href="https://www.unapiquitos.edu.pe/" target="_blank" rel="noopener noreferrer" title="Universidad Nacional de la Amazonía Peruana (UNAP)">
+                                <img src="unap_logo.jpg" alt="UNAP">
+                            </a>
+                            <a href="https://www.bgc-jena.mpg.de/" target="_blank" rel="noopener noreferrer" title="Max Planck Institute for Biogeochemistry (MPI-BGC)">
+                                <img src="mpi_Logo.png" alt="Max Planck Institute for Biogeochemistry">
+                            </a>
+                            <a href="https://www.gov.br/inpa/" target="_blank" rel="noopener noreferrer" title="Instituto Nacional de Pesquisas da Amazônia (INPA)">
+                                <img src="inpalogo.jpg" alt="INPA">
+                            </a>
+                            <a href="https://www.lbl.gov/" target="_blank" rel="noopener noreferrer" title="Lawrence Berkeley National Laboratory (Berkeley Lab)">
+                                <img src="lbl.png" alt="Berkeley Lab">
+                            </a>
+                            <a href="https://www.julius-kuehn.de/" target="_blank" rel="noopener noreferrer" title="Julius Kühn Institute (JKI) – Federal Research Centre for Cultivated Plants">
+                                <img src="Logo_eng_RGB.jpg" alt="Julius Kühn Institute (JKI) Institute for Forest Protection">
+                            </a>
         
-                            <!-- Set 2: DUPLICATE THE EXACT SAME LIST -->
-                            <img src="unap_logo.jpg" alt="UNAP">
-                            <img src="mpi_Logo.png" alt="Max Planck Institute for Biogeochemistry">
-                            <img src="inpalogo.jpg" alt="INPA">
-                            <img src="lbl.png" alt="Berkeley Lab">
-                            <img src="Logo_eng_RGB.jpg" alt="Julius Kühn Institute (JKI) Institute for Forest Protection">
+                            <!-- Set 2: Duplicate for Seamless Marquee Loop -->
+                            <a href="https://www.unapiquitos.edu.pe/" target="_blank" rel="noopener noreferrer" title="Universidad Nacional de la Amazonía Peruana (UNAP)">
+                                <img src="unap_logo.jpg" alt="UNAP">
+                            </a>
+                            <a href="https://www.bgc-jena.mpg.de/" target="_blank" rel="noopener noreferrer" title="Max Planck Institute for Biogeochemistry (MPI-BGC)">
+                                <img src="mpi_Logo.png" alt="Max Planck Institute for Biogeochemistry">
+                            </a>
+                            <a href="https://www.gov.br/inpa/" target="_blank" rel="noopener noreferrer" title="Instituto Nacional de Pesquisas da Amazônia (INPA)">
+                                <img src="inpalogo.jpg" alt="INPA">
+                            </a>
+                            <a href="https://www.lbl.gov/" target="_blank" rel="noopener noreferrer" title="Lawrence Berkeley National Laboratory (Berkeley Lab)">
+                                <img src="lbl.png" alt="Berkeley Lab">
+                            </a>
+                            <a href="https://www.julius-kuehn.de/" target="_blank" rel="noopener noreferrer" title="Julius Kühn Institute (JKI) – Federal Research Centre for Cultivated Plants">
+                                <img src="Logo_eng_RGB.jpg" alt="Julius Kühn Institute (JKI) Institute for Forest Protection">
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -478,7 +513,7 @@
             </div>
         </section>
 
-        <!-- View: STATE OF THE ART (Dark Mode + 100% Translated EN / ES / PT + White LiDAR Border Removed) -->
+        <!-- View: STATE OF THE ART (Dark Mode + 100% Translated EN / ES / PT / DE + White LiDAR Border Removed) -->
         <section id="stateoftheart" class="view-section py-20 bg-gray-950 min-h-[calc(100vh-5rem)]">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 
@@ -739,18 +774,18 @@
             </div>
         </section>
 
-        <!-- View: DATA & CITIZEN SCIENCE -->
+        <!-- View: UNIFIED DATA, CITIZEN SCIENCE & CONTACT -->
         <section id="data" class="view-section py-20 bg-gray-900 min-h-[calc(100vh-5rem)]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="reveal text-center max-w-3xl mx-auto mb-12">
-                    <h2 class="text-sm font-bold text-amazon-400 tracking-widest uppercase mb-3" data-i18n="data_badge">Open Science & Citizen Monitoring</h2>
-                    <h3 class="text-3xl font-serif font-bold text-white mb-4" data-i18n="data_title">Study Sites, Datasets & Field Reports</h3>
+                    <h2 class="text-sm font-bold text-amazon-400 tracking-widest uppercase mb-3" data-i18n="data_badge">Open Science, Citizen Monitoring & Contact</h2>
+                    <h3 class="text-3xl font-serif font-bold text-white mb-4" data-i18n="data_title">Study Sites, Datasets & Collaboration</h3>
                     <p class="text-gray-400" data-i18n="data_desc">
-                        Explore our network of monitoring locations, contribute field observations, and access our permanently hosted open-access research data.
+                        Contribute field observations, explore our network of monitoring locations, access our open-access datasets, or reach out directly to our team.
                     </p>
                 </div>
 
-                <!-- SUPER FAST CITIZEN SCIENCE MODULE -->
+                <!-- 1. SUPER FAST CITIZEN SCIENCE MODULE -->
                 <div id="citizen-science-box" class="reveal max-w-5xl mx-auto mb-16 bg-gradient-to-br from-amazon-950 via-gray-950 to-amazon-900/90 text-white rounded-2xl p-6 sm:p-10 shadow-2xl border border-amazon-700/60">
                     <div class="flex flex-col lg:flex-row gap-8 items-start">
                         <!-- Left explanation -->
@@ -840,7 +875,7 @@
                     </div>
                 </div>
 
-                <!-- Google My Maps Interactive Map -->
+                <!-- 2. Google My Maps Interactive Map -->
                 <div class="reveal reveal-right max-w-5xl mx-auto mb-16">
                     <h4 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
                         <svg class="w-6 h-6 text-amazon-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -862,8 +897,8 @@
                     <p class="text-sm text-gray-400 mt-3 text-center" data-i18n="map_caption">Locations of our field plots, flux towers, and active windthrow disturbance monitoring sites.</p>
                 </div>
 
-                <div class="reveal max-w-3xl mx-auto">
-                    <!-- Zenodo Custom Card -->
+                <!-- 3. Zenodo Custom Card -->
+                <div class="reveal max-w-3xl mx-auto mb-20">
                     <div class="bg-gray-950 border border-gray-800 rounded-2xl p-8 shadow-xl hover:border-amazon-500/40 transition-all">
                         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
                             <div class="flex items-center gap-4 mb-4 md:mb-0">
@@ -902,6 +937,80 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 4. INTEGRATED CONTACT & COLLABORATION SECTION -->
+                <div id="contact-block" class="border-t border-gray-800 pt-16 mt-8">
+                    <div class="reveal text-center max-w-3xl mx-auto mb-14">
+                        <h2 class="text-sm font-bold text-amazon-400 tracking-widest uppercase mb-3" data-i18n="contact_badge">Get in Touch</h2>
+                        <h3 class="text-3xl font-serif font-bold text-white mb-4" data-i18n="contact_title">Contact & Collaboration</h3>
+                        <p class="text-gray-400 text-lg leading-relaxed" data-i18n="contact_desc">
+                            Interested in our research, datasets, or exploring collaboration opportunities? Reach out to our team.
+                        </p>
+                    </div>
+
+                    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <!-- Contact Information -->
+                        <div class="reveal bg-gray-950 rounded-2xl p-8 border border-gray-800 shadow-xl">
+                            <h4 class="text-2xl font-bold text-white mb-6" data-i18n="contact_direct">Direct Inquiries</h4>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 bg-amazon-950 text-amazon-400 border border-amazon-800/60 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-bold text-white" data-i18n="contact_email_lbl">Email Address</p>
+                                        <a href="mailto:jurquiza@bgc-jena.mpg.de" class="text-amazon-400 hover:text-amazon-300 text-sm">jurquiza@bgc-jena.mpg.de</a>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 bg-amazon-950 text-amazon-400 border border-amazon-800/60 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-bold text-white" data-i18n="contact_loc">Primary Locations</p>
+                                        <p class="text-gray-300 text-sm mt-1"><strong>Universidad Nacional de la Amazonía Peruana</strong><br>Iquitos, Peru</p>
+                                        <p class="text-gray-300 text-sm mt-3"><strong>Max Planck Institute for Biogeochemistry</strong><br>Jena, Germany</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Data Request Reminder -->
+                            <div class="mt-10 bg-blue-950/40 border-l-4 border-blue-500 p-4 rounded-r-lg border-t border-r border-b border-blue-900/40">
+                                <p class="text-sm text-blue-200" data-i18n="contact_data_note">
+                                    <strong>Data Requests:</strong> WInD V.1 data in formats like shapefile or CSV are available upon request. Please email us with a brief description of your intended research use.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Contact Form (Visual) -->
+                        <div class="reveal reveal-right delay-100 bg-gray-950 rounded-2xl p-8 border border-gray-800 shadow-xl">
+                            <form action="mailto:jurquiza@bgc-jena.mpg.de" method="POST" enctype="text/plain" class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1" data-i18n="form_name">Name</label>
+                                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-700 text-white placeholder-gray-500 rounded-lg focus:ring-2 focus:ring-amazon-500 focus:border-amazon-500 outline-none transition-colors" placeholder="Jane Doe">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1" data-i18n="form_email">Email</label>
+                                    <input type="email" class="w-full px-4 py-2 bg-gray-900 border border-gray-700 text-white placeholder-gray-500 rounded-lg focus:ring-2 focus:ring-amazon-500 focus:border-amazon-500 outline-none transition-colors" placeholder="jane@example.com">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1" data-i18n="form_subject">Subject</label>
+                                    <input type="text" class="w-full px-4 py-2 bg-gray-900 border border-gray-700 text-white placeholder-gray-500 rounded-lg focus:ring-2 focus:ring-amazon-500 focus:border-amazon-500 outline-none transition-colors" placeholder="Collaboration Inquiry">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1" data-i18n="form_msg">Message</label>
+                                    <textarea rows="4" class="w-full px-4 py-2 bg-gray-900 border border-gray-700 text-white placeholder-gray-500 rounded-lg focus:ring-2 focus:ring-amazon-500 focus:border-amazon-500 outline-none transition-colors" placeholder="How can we work together?"></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-amazon-600 hover:bg-amazon-500 text-white font-semibold py-3 rounded-lg transition-colors shadow-lg mt-2" data-i18n="form_send">
+                                    Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -988,7 +1097,7 @@
             </div>
         </section>
 
-        <!-- View: TEAM (Dark Mode + 100% Translated EN / ES / PT) -->
+        <!-- View: TEAM (Dark Mode + 100% Translated EN / ES / PT / DE) -->
         <section id="team" class="view-section py-20 bg-gray-900 min-h-[calc(100vh-5rem)]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
@@ -1217,81 +1326,6 @@
             </div>
         </section>
 
-        <!-- View: CONTACT -->
-        <section id="contact" class="view-section py-20 bg-gray-950 min-h-[calc(100vh-5rem)]">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="reveal text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-sm font-bold text-amazon-400 tracking-widest uppercase mb-3" data-i18n="contact_badge">Get in Touch</h2>
-                    <h3 class="text-3xl font-serif font-bold text-white mb-4" data-i18n="contact_title">Contact & Collaboration</h3>
-                    <p class="text-gray-400 text-lg leading-relaxed" data-i18n="contact_desc">
-                        Interested in our research, datasets, or exploring collaboration opportunities? Reach out to our team.
-                    </p>
-                </div>
-
-                <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <!-- Contact Information -->
-                    <div class="reveal bg-gray-900 rounded-2xl p-8 border border-gray-800 shadow-xl">
-                        <h4 class="text-2xl font-bold text-white mb-6" data-i18n="contact_direct">Direct Inquiries</h4>
-                        
-                        <div class="space-y-6">
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 bg-amazon-950 text-amazon-400 border border-amazon-800/60 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-bold text-white" data-i18n="contact_email_lbl">Email Address</p>
-                                    <a href="mailto:jurquiza@bgc-jena.mpg.de" class="text-amazon-400 hover:text-amazon-300 text-sm">jurquiza@bgc-jena.mpg.de</a>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 bg-amazon-950 text-amazon-400 border border-amazon-800/60 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-bold text-white" data-i18n="contact_loc">Primary Locations</p>
-                                    <p class="text-gray-300 text-sm mt-1"><strong>Universidad Nacional de la Amazonía Peruana</strong><br>Iquitos, Peru</p>
-                                    <p class="text-gray-300 text-sm mt-3"><strong>Max Planck Institute for Biogeochemistry</strong><br>Jena, Germany</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Data Request Reminder -->
-                        <div class="mt-10 bg-blue-950/40 border-l-4 border-blue-500 p-4 rounded-r-lg border-t border-r border-b border-blue-900/40">
-                            <p class="text-sm text-blue-200" data-i18n="contact_data_note">
-                                <strong>Data Requests:</strong> WInD V.1 data in formats like shapefile or CSV are available upon request. Please email us with a brief description of your intended research use.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Contact Form (Visual) -->
-                    <div class="reveal reveal-right delay-100 bg-gray-900 rounded-2xl p-8 border border-gray-800 shadow-xl">
-                        <form action="mailto:jurquiza@bgc-jena.mpg.de" method="POST" enctype="text/plain" class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-1" data-i18n="form_name">Name</label>
-                                <input type="text" class="w-full px-4 py-2 bg-gray-950 border border-gray-700 text-white placeholder-gray-500 rounded-lg focus:ring-2 focus:ring-amazon-500 focus:border-amazon-500 outline-none transition-colors" placeholder="Jane Doe">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-1" data-i18n="form_email">Email</label>
-                                <input type="email" class="w-full px-4 py-2 bg-gray-950 border border-gray-700 text-white placeholder-gray-500 rounded-lg focus:ring-2 focus:ring-amazon-500 focus:border-amazon-500 outline-none transition-colors" placeholder="jane@example.com">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-1" data-i18n="form_subject">Subject</label>
-                                <input type="text" class="w-full px-4 py-2 bg-gray-950 border border-gray-700 text-white placeholder-gray-500 rounded-lg focus:ring-2 focus:ring-amazon-500 focus:border-amazon-500 outline-none transition-colors" placeholder="Collaboration Inquiry">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-1" data-i18n="form_msg">Message</label>
-                                <textarea rows="4" class="w-full px-4 py-2 bg-gray-950 border border-gray-700 text-white placeholder-gray-500 rounded-lg focus:ring-2 focus:ring-amazon-500 focus:border-amazon-500 outline-none transition-colors" placeholder="How can we work together?"></textarea>
-                            </div>
-                            <button type="submit" class="w-full bg-amazon-600 hover:bg-amazon-500 text-white font-semibold py-3 rounded-lg transition-colors shadow-lg mt-2" data-i18n="form_send">
-                                Send Message
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
     </main>
 
     <!-- Footer -->
@@ -1320,7 +1354,7 @@
         </div>
     </footer>
 
-    <!-- Interactive Scripts for SPA, Complete Flag i18n, Citizen Science, Scroll Reveal, LiDAR Fix, and APIs -->
+    <!-- Interactive Scripts for SPA, 4-Language Flag i18n (EN/ES/PT/DE), Citizen Science, Scroll Reveal, LiDAR Fix, and APIs -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
@@ -1344,7 +1378,7 @@
             }
 
             // ==========================================
-            // 0. Complete Trilingual Dictionary (EN / ES / PT)
+            // 0. Complete 4-Language Dictionary (EN / ES / PT / DE)
             // ==========================================
             const translations = {
                 en: {
@@ -1353,10 +1387,9 @@
                     nav_sota: "State of the Art",
                     nav_apps: "Apps",
                     nav_flux: "Flux Towers",
-                    nav_data: "Data & Citizen Science",
+                    nav_data: "Data & Contact",
                     nav_pubs: "Publications",
                     nav_team: "Team",
-                    nav_contact: "Contact",
                     hero_badge: "Research Initiative",
                     hero_title: "Windthrow Amazon Observatory",
                     hero_subtitle: "Windthrow Amazon Observatory for Study and Understanding Ecosystems",
@@ -1451,10 +1484,10 @@
                     flux_video_title: "Flux Tower Operations Overview",
                     flux_video_cap: "Visualizing ground-based meteorological monitoring and data collection.",
 
-                    // DATA & CITIZEN SCIENCE
-                    data_badge: "Open Science & Citizen Monitoring",
-                    data_title: "Study Sites, Datasets & Field Reports",
-                    data_desc: "Explore our network of monitoring locations, contribute field observations, and access our permanently hosted open-access research data.",
+                    // DATA, CITIZEN SCIENCE & CONTACT
+                    data_badge: "Open Science, Citizen Monitoring & Contact",
+                    data_title: "Study Sites, Datasets & Collaboration",
+                    data_desc: "Contribute field observations, explore our network of monitoring locations, access our open-access datasets, or reach out directly to our team.",
                     cs_badge: "Citizen Science Network",
                     cs_title: "Report a Windthrow in 30 Seconds",
                     cs_desc: "Have you observed fallen trees after a severe storm in the Amazon? Park rangers, local communities, researchers, and drone pilots can report events here to help validate satellite detections across Peru, Brazil, and the wider basin.",
@@ -1542,10 +1575,9 @@
                     nav_sota: "Estado del Arte",
                     nav_apps: "Aplicaciones",
                     nav_flux: "Torres de Flujo",
-                    nav_data: "Datos y Ciencia Ciudadana",
+                    nav_data: "Datos y Contacto",
                     nav_pubs: "Publicaciones",
                     nav_team: "Equipo",
-                    nav_contact: "Contacto",
                     hero_badge: "Iniciativa de Investigación",
                     hero_title: "Observatorio Amazónico de Windthrows",
                     hero_subtitle: "Observatorio Amazónico de Derribos por Viento para el Estudio y Comprensión de Ecosistemas",
@@ -1640,10 +1672,10 @@
                     flux_video_title: "Operaciones en Torres de Flujo",
                     flux_video_cap: "Visualización del monitoreo meteorológico en tierra y recolección de datos.",
 
-                    // DATA & CITIZEN SCIENCE
-                    data_badge: "Ciencia Abierta y Monitoreo Ciudadano",
-                    data_title: "Sitios de Estudio, Datos y Reportes de Campo",
-                    data_desc: "Explora nuestra red de parcelas de monitoreo, reporta observaciones de campo y accede a nuestras bases de datos de acceso abierto.",
+                    // DATA, CITIZEN SCIENCE & CONTACT
+                    data_badge: "Ciencia Abierta, Monitoreo Ciudadano y Contacto",
+                    data_title: "Sitios de Estudio, Datos y Colaboración",
+                    data_desc: "Reporta observaciones de campo, explora nuestra red de parcelas de monitoreo, accede a nuestras bases de datos abiertas o ponte en contacto con nuestro equipo.",
                     cs_badge: "Red de Ciencia Ciudadana",
                     cs_title: "Reporta un Derribo por Viento en 30 Segundos",
                     cs_desc: "¿Has observado caídas masivas de árboles tras una tormenta en la Amazonía? Guardaparques, comunidades locales, investigadores y pilotos de drones pueden reportar eventos aquí para validar detecciones satelitales en Perú, Brasil y toda la cuenca.",
@@ -1731,10 +1763,9 @@
                     nav_sota: "Estado da Arte",
                     nav_apps: "Aplicações",
                     nav_flux: "Torres de Fluxo",
-                    nav_data: "Dados e Ciência Cidadã",
+                    nav_data: "Dados e Contato",
                     nav_pubs: "Publicações",
                     nav_team: "Equipe",
-                    nav_contact: "Contato",
                     hero_badge: "Iniciativa de Pesquisa",
                     hero_title: "Observatório Amazônico de Windthrows",
                     hero_subtitle: "Observatório Amazônico de Queda de Árvores pelo Vento para o Estudo e Compreensão de Ecossistemas",
@@ -1829,10 +1860,10 @@
                     flux_video_title: "Visão Geral das Torres de Fluxo",
                     flux_video_cap: "Visualizando o monitoramento meteorológico em solo e a coleta de dados.",
 
-                    // DATA & CITIZEN SCIENCE
-                    data_badge: "Ciência Aberta e Monitoramento Cidadão",
-                    data_title: "Sítios de Estudo, Dados e Relatos de Campo",
-                    data_desc: "Explore nossa rede de monitoramento, contribua com observações de campo e acesse nossos conjuntos de dados de acesso aberto.",
+                    // DATA, CITIZEN SCIENCE & CONTACT
+                    data_badge: "Ciência Aberta, Monitoramento Cidadão e Contato",
+                    data_title: "Sítios de Estudo, Dados e Colaboração",
+                    data_desc: "Contribua com observações de campo, explore nossa rede de monitoramento, acesse nossos conjuntos de dados abertos ou fale diretamente com nossa equipe.",
                     cs_badge: "Rede de Ciência Cidadã",
                     cs_title: "Reporte um Windthrow em 30 Segundos",
                     cs_desc: "Observou árvores caídas após uma tempestade severa na Amazônia? Guarda-parques, comunidades locais, pesquisadores e pilotos de drone podem relatar eventos aqui para ajudar a validar detecções por satélite no Brasil, Peru e em toda a bacia.",
@@ -1913,6 +1944,194 @@
                     footer_visitors: "Total de Visitantes Únicos",
                     footer_rights: "© 2026 WAOSUE. Todos os direitos reservados.",
                     footer_license: "Conteúdo licenciado sob CC BY 4.0"
+                },
+                de: {
+                    nav_sub: "Windwurf-Observatorium",
+                    nav_home: "Startseite",
+                    nav_sota: "Stand der Forschung",
+                    nav_apps: "Apps",
+                    nav_flux: "Flusstürme",
+                    nav_data: "Daten & Kontakt",
+                    nav_pubs: "Publikationen",
+                    nav_team: "Team",
+                    hero_badge: "Forschungsinitiative",
+                    hero_title: "Amazonas-Windwurf-Observatorium",
+                    hero_subtitle: "Amazonas-Observatorium für Windwurf zur Erforschung und zum Verständnis von Ökosystemen",
+                    hero_desc: "Ein kollaboratives wissenschaftliches Observatorium zur Untersuchung großflächiger Sturmstörungen, zur Quantifizierung rascher Kronendachveränderungen und zur Bewertung ihrer langfristigen Auswirkungen auf die Kohlenstoffdynamik in tropischen Waldökosystemen.",
+                    hero_btn_apps: "Apps Entdecken",
+                    hero_btn_flux: "Flusstürme",
+                    hero_btn_report: "Windwurf Melden",
+                    glance_title: "WAOSUE auf einen Blick",
+                    card1_title: "Kartierte Ereignisse & Wachsend",
+                    card1_desc: "Wir haben seit 1985 einen fast vierfachen Anstieg der Windwurfhäufigkeit dokumentiert und rund 5.000 großflächige Ereignisse im gesamten Amazonasbecken identifiziert.",
+                    card2_title: "Windwurf-Hotspots",
+                    card2_desc: "Die Störungen sind geografisch stark konzentriert. Etwa 33 % aller erfassten Ereignisse traten auf nur 3 % der überwachten Fläche im zentralen und westlichen Amazonasgebiet auf.",
+                    card3_unit: "Jahre",
+                    card3_title: "Rasche Erholung (NWA)",
+                    card3_desc: "Die Wälder im nordwestlichen Amazonasgebiet zeigen eine bemerkenswerte Resilienz: Baumdichte und Grundfläche erholen sich nach 20 Jahren auf >90 % der Primärwaldwerte (~50 % schneller als im Zentralamazonas).",
+                    card4_title: "Kronendach-Ergrünungsphase",
+                    card4_desc: "Nach einer Störung steigt der Enhanced Vegetation Index (EVI) stetig an und erreicht im ersten Jahrzehnt oft einen Spitzenwert von 20 % über dem angrenzenden ungestörten Wald, wenn Pionierarten die Lücken besiedeln.",
+                    mission_title: "Unsere Mission",
+                    mission_desc: "Erforschung, Quantifizierung und Verständnis der Auswirkungen großflächiger Windwurfstörungen und extremer Wetterereignisse auf die strukturelle Integrität, Kohlenstoffdynamik und langfristige ökologische Resilienz des Amazonas-Regenwaldes.",
+                    scope_title: "Forschungsbereich",
+                    scope_desc: "Unser geografischer Fokus erstreckt sich von den kritischen Anden-Amazonas-Höhengradienten bis ins zentrale Amazonasbecken. Wir integrieren bodengestützte Waldinventuren, Flussturm-Netzwerke und hochauflösende Satellitenfernerkundung.",
+                    obj_title: "Kernziele",
+                    obj_1: "Überwachung und Kartierung von Windwurfereignissen mit modernsten räumlichen Methoden.",
+                    obj_2: "Bewertung der Kaskadeneffekte von Kronendachlücken auf die Waldsukzession.",
+                    obj_3: "Förderung von Open Science durch transparente, standardisierte Datensätze.",
+                    obj_4: "Verknüpfung lokaler Felddaten mit prädiktiven Erdsystemmodellen.",
+                    callout_title: "Ausgewähltes Forschungshighlight:",
+                    callout_desc: "Mehr über unsere Kernmission und die Auswirkungen extremer Stürme erfahren? Entdecken Sie unsere aktuelle Multimedia-Publikation.",
+                    callout_link: "Verändern extreme Stürme den Amazonas schneller als wir denken?",
+                    disc_title: "Community-Diskussion",
+                    disc_desc: "Hinterlassen Sie einen Kommentar, stellen Sie eine Frage oder diskutieren Sie unsere Forschung mit Ihrem GitHub-Konto.",
+                    partners_title: "Unsere Partner & Institutionelle Verbindungen",
+
+                    // STATE OF THE ART (Vollständige deutsche Übersetzung)
+                    sota_badge: "Wissenschaftlicher Hintergrund",
+                    sota_title: "Stand der Forschung: Windwürfe im Amazonasbecken",
+                    sota_subtitle: "Ein umfassender Überblick über sturmbedingte Waldstörungen, die Dynamik von Kronendachlücken und ihre tiefgreifenden Auswirkungen auf den globalen Kohlenstoffkreislauf.",
+                    sota_facts_title: "Wichtige Merkmale",
+                    sota_fact1_lbl: "Auslöser:",
+                    sota_fact1_val: "Schwere konvektive Stürme, Böenlinien (Squall Lines) und Fallböen (Downbursts).",
+                    sota_fact2_lbl: "Auswirkung:",
+                    sota_fact2_val: "Bricht und entwurzelt Kronendachbäume und verursacht bei Extremereignissen bis zu 95 % Mortalität.",
+                    sota_fact3_lbl: "Hotspots:",
+                    sota_fact3_val: "33 % der detektierten Ereignisse treten auf nur 3 % der Fläche des Amazonasbeckens auf.",
+                    sota_fact4_lbl: "Detektion:",
+                    sota_fact4_val: "Subpixel-Spektrale Mischungsanalyse (SMA) zur Quantifizierung nicht-photosynthetischer Vegetation (NPV).",
+                    sota_h1: "Das Phänomen & Meteorologische Treiber",
+                    sota_p1_1: "Windwürfe (Windthrows) sind eine bedeutende natürliche Störung im Amazonasgebiet, die durch starke Abwinde und Fallböen (Downbursts) im Zusammenhang mit schweren konvektiven Stürmen und großräumigen Böenlinien entsteht. Diese intensiven, lokal begrenzten Windböen erreichen Geschwindigkeiten, die ausreichen, um mächtige Bäume des Kronendachs zu brechen und zu entwurzeln, wodurch Waldlücken von wenigen Einzelbäumen bis hin zu Tausenden zusammenhängenden Hektar entstehen.",
+                    sota_p1_2: "Besorgniserregend ist, dass die Häufigkeit dieser Ereignisse stark zunimmt. Zwischen 1985 und 2020 haben sich sowohl die Anzahl großer Windwürfe (≥30 ha) als auch die betroffene Gesamtстраиfläche nahezu vervierfacht. Dieser Anstieg geht mit einer langfristigen Zunahme extremer atmosphärischer Instabilität einher (dem oberen 95. Perzentil der nachmittäglichen konvektiv verfügbaren potenziellen Energie, CAPE). Die Schäden sind räumlich stark konzentriert: Rund 33 % aller Großereignisse treten in spezifischen „Hotspot“-Regionen im zentralen und westlichen Amazonasgebiet auf, die nur ~3 % der Gesamtfläche des Beckens ausmachen.",
+                    sota_h2: "Kohlenstoffkreislauf & Erholung der Biomasse",
+                    sota_p2_1: "Intensive Windwürfe überführen schlagartig enorme Mengen lebender oberirdischer Biomasse (AGB) in den Totholzpool (Coarse Woody Debris) und reduzieren die lokale Biomasse teils um über 60 %. Während diese Nekromasse zersetzt wird, verwandeln sich betroffene Waldflächen vorübergehend von Netto-Kohlenstoffsenken in Netto-Kohlenstoffquellen.",
+                    sota_p2_2: "Die Fähigkeit zur Biomasseerholung variiert jedoch regional erheblich. Im hochproduktiven nordwestlichen Amazonasgebiet zeigen die Wälder eine bemerkenswerte Resilienz und erreichen nach rund 20 Jahren wieder >90 % der Biomassewerte alter Primärwälder. Diese Erholungsrate ist etwa 50 % schneller als im zentralen Amazonasgebiet, was darauf hindeutet, dass nordwestliche Wälder evolutionär an häufigere und schwerere Sturmstörungen angepasst sein könnten.",
+                    sota_h3: "Waldsukzession und Ergrünung des Kronendachs",
+                    sota_p3_1: "Das Entstehen großer Kronendachlücken erhöht die Lichtverfügbarkeit am Waldboden drastisch und löst eine kräftige, über Jahrzehnte andauernde Sukzessionsreaktion aus. Die Auswertung des Enhanced Vegetation Index (EVI) über 32 Jahre zeigt einen anfänglichen starken Rückgang der Grünheit unmittelbar nach der Störung, gefolgt von einer raschen „Ergrünungsphase“ (Greening).",
+                    sota_p3_2: "Im ersten Jahrzehnt der Erholung steigt der EVI stetig an und erreicht häufig Spitzenwerte von 20 % über dem Niveau ungestörter Primärwälder. Diese erhöhte optische Signatur spiegelt die rasche Besiedlung durch schnell wachsende Pionierarten wider, die stark reflektierende, breite Blätter besitzen. Wenn der Wald in den folgenden 15 bis 30 Jahren reift, beginnen langlebigere spät-sukzessionale Arten zu dominieren und komplexe, mehrschichtige Kronendächer zu bilden, wodurch das EVI-Signal allmählich abnimmt und sich stabilisiert.",
+                    sota_lidar_title: "Interaktive 3D-Kronendachstruktur (LiDAR)",
+                    sota_lidar_loading: "3D-LiDAR-Modell wird geladen...",
+                    sota_lidar_help: "Linksklick & Ziehen zum Drehen • Scrollen zum Zoomen • Rechtsklick zum Verschieben",
+                    sota_h4: "Moderne Detektion: Der Wayra-Ansatz",
+                    sota_p4_1: "Traditionell erforderte die Kartierung dieser abgelegenen Störungen aufwendige Feldkampagnen. Heute nutzen Observatorien wie WAOSUE fortschrittliche Verfahren wie die Spektrale Mischungsanalyse (SMA) auf optischen Satellitenbildern. Die SMA zerlegt das Spektralsignal gemischter Pixel, um die relativen Anteile von nicht-photosynthetischer Vegetation (NPV, Totholz/freiliegende Äste), grüner Vegetation (GV) und Schatten zu bestimmen.",
+                    sota_p4_2: "Der abrupte Anstieg des NPV-Anteils dient als robuster physikalischer Indikator zur Quantifizierung der Baummortalität und zur Kartierung der charakteristischen fächerförmigen Geometrien schwerer Windwürfe. Durch die Kombination dieses Fernerkundungsansatzes mit hochauflösendem 3D-LiDAR und präzisen Waldinventuren vor Ort schlagen Forschende die Brücke zwischen großräumigen atmosphärischen Phänomenen und lokaler Waldökologie.",
+                    sota_ref_title: "Grundlagenliteratur",
+                    sota_ref_badge: "Hauptreferenz",
+                    sota_ref_btn: "Vollständige Dissertation (PDF)",
+
+                    // APPS
+                    apps_badge: "Interaktive Geodaten",
+                    apps_title: "Wayra Tools: Windwurf-Monitoring",
+                    apps_desc: "Inspiriert von Wayra – dem Quechua-Wort für Wind – ermöglichen diese Tools die Erkundung interaktiver Monitoring-Dashboards zu sturmbedingten Waldstörungen im gesamten Amazonasgebiet.",
+                    shiny_title: "Erweitertes Statistisches Dashboard",
+                    shiny_desc: "Analysieren Sie zeitliche Störungstrends, Mortalitätszensen und statistische Modelle in unserer spezialisierten Shiny-Anwendung.",
+                    shiny_btn: "Shiny-App Starten",
+                    gee2_title: "Amazonas Windwurf-Explorer",
+                    gee2_desc: "Erkunden Sie interaktive räumliche Ebenen zur Kartierung von Waldstörungen und Erholungsdynamiken in unseren Hauptuntersuchungsgebieten.",
+                    gee2_loading: "Windwurf-Explorer wird geladen...",
+                    gee1_title: "Wayra Windwurf-Observatorium",
+                    gee1_loading: "Earth Engine App wird geladen...",
+
+                    // FLUX TOWERS
+                    flux_badge: "Mikrometeorologie & Kohlenstoffaustausch",
+                    flux_title: "Flussturm-Netzwerke",
+                    flux_desc: "Überwachung des Kohlenstoffaustauschs tropischer Ökosysteme, der sonneninduzierten Fluoreszenz (SIF), der Bruttoprimärproduktion (GPP) und des Netto-Ökosystemaustauschs (NEE) im Amazonasbecken und in Übergangszonen.",
+                    flux_pan_desc: "Koordinierung regionaler Forschungsinitiativen und Flussturm-Standorte im gesamten Amazonasbecken zur Erfassung langfristiger meteorologischer Trends, des Kohlenstoffkreislaufs und der Walderholung nach Extremwetterereignissen.",
+                    flux_andes_desc: "Fokus auf Ökosystemfunktionen entlang kritischer Anden-Amazonas-Höhengradienten zur Untersuchung komplexer atmosphärischer Austauschprozesse, des Feuchtigkeitstransports und der Kohlenstoffdynamik.",
+                    flux_cov_lbl: "📍 Abdeckung:",
+                    flux_pan_cov: "Ökosystem des Amazonasbeckens",
+                    flux_inst_lbl: "📊 Instrumente:",
+                    flux_pan_inst: "Bodengestützte SIF-Sensoren, Eddy-Kovarianz-Türme",
+                    flux_andes_cov: "Anden-Amazonas-Höhengradient",
+                    flux_focus_lbl: "🔬 Fokus:",
+                    flux_andes_focus: "Topografischer und höhenabhängiger Einfluss auf den Ökosystemaustausch",
+                    flux_video_title: "Überblick zum Flussturm-Betrieb",
+                    flux_video_cap: "Visualisierung bodengestützter meteorologischer Messungen und Datenerfassung.",
+
+                    // DATA, CITIZEN SCIENCE & CONTACT
+                    data_badge: "Open Science, Citizen Science & Kontakt",
+                    data_title: "Untersuchungsgebiete, Datensätze & Kooperation",
+                    data_desc: "Melden Sie Feldbeobachtungen, erkunden Sie unser Monitoring-Netzwerk, greifen Sie auf unsere Open-Access-Datensätze zu oder kontaktieren Sie direkt unser Team.",
+                    cs_badge: "Citizen-Science-Netzwerk",
+                    cs_title: "Windwurf in 30 Sekunden melden",
+                    cs_desc: "Haben Sie nach einem schweren Sturm im Amazonasgebiet umgestürzte Bäume beobachtet? Nationalpark-Ranger, lokale Gemeinschaften, Forschende und Drohnenpiloten können hier Ereignisse melden, um Satellitendetektionen in Peru, Brasilien und dem gesamten Becken zu validieren.",
+                    cs_tip1: "Nutzen Sie die GPS-Schaltfläche zum automatischen Einfügen Ihrer Koordinaten.",
+                    cs_tip2: "Unser Team gleicht Meldungen mit Sentinel-2- und Landsat-Aufnahmen ab.",
+                    cs_lbl_coords: "Standort (Koordinaten oder Ortsname) *",
+                    cs_btn_gps: "Mein GPS",
+                    cs_lbl_country: "Land / Region",
+                    cs_lbl_date: "Ungefähres Sturmdatum",
+                    cs_lbl_scale: "Geschätzte Schadensfläche",
+                    cs_opt_small: "< 5 ha (Kleine Lücke / Einzelne Bäume)",
+                    cs_opt_med: "5 – 30 ha (Mittlerer Windwurf)",
+                    cs_opt_large: "≥ 30 ha (Großflächiger Windwurf)",
+                    cs_opt_unsure: "Unsicher / Satellitenprüfung erforderlich",
+                    cs_lbl_source: "Art der Beobachtung",
+                    cs_src_field: "🥾 Feld- / Bodenbeobachtung",
+                    cs_src_drone: "🚁 Drohnen- / UAV-Überflug",
+                    cs_src_comm: "🏡 Lokale Gemeinschaft / Park-Ranger",
+                    cs_src_sat: "🛰️ Satellitenbild",
+                    cs_lbl_notes: "Name des Beobachters, Notizen oder Link zu Fotos/Drohne (Optional)",
+                    cs_btn_submit: "Feldbericht an WAOSUE senden",
+                    map_title: "Interaktive Karte der Untersuchungsflächen & Sensoren",
+                    map_caption: "Standorte unserer Waldinventurflächen, Flusstürme und aktiven Windwurf-Monitoring-Gebiete.",
+                    zenodo_title: "Windwurf-Störungsdatensatz (WInD)",
+                    zenodo_btn: "Daten auf Zenodo abrufen",
+                    zenodo_desc: "Alle detektierten Windwürfe (3.170) wurden in unserer Windthrow Inventory Database, Version 1.0 (WInD V.1), strukturiert und archiviert. WInD V.1 umfasst einen vollständigen Katalog der in 33 Untersuchungsjahren erfassten Windwürfe sowie detaillierte Attribute (Fläche, Schweregrad und räumliche Pixelverteilung). Daten im Shapefile- oder CSV-Format sind auf Anfrage per E-Mail erhältlich: jurquiza@bgc-jena.mpg.de",
+                    zenodo_views_lbl: "Live-Aufrufe",
+                    zenodo_dl_lbl: "Live-Downloads",
+
+                    // PUBLICATIONS
+                    pubs_badge: "Fachliteratur",
+                    pubs_title: "Aktuelle Publikationen",
+                    pubs_desc: "Ausgewählte begutachtete Fachartikel (Peer-Review) von WAOSUE-Forschenden.",
+                    pubs_read: "Artikel Lesen",
+
+                    // TEAM (Vollständige deutsche Übersetzung)
+                    team_badge: "Unser Team",
+                    team_title: "Forschende & Netzwerk",
+                    filter_all: "Alle Fachgebiete",
+                    filter_inv: "Waldinventur",
+                    filter_drone: "Drohnen-Monitoring",
+                    filter_ds: "Data Science",
+                    filter_atm: "Atmosphärenwissenschaften",
+                    filter_rs: "Fernerkundung",
+                    filter_dist: "Waldstörungen",
+                    team_founders: "Gründer",
+                    role_pi: "Projektleiter (PI) & Gründer",
+                    role_cofounder_f: "Mitbegründerin",
+                    role_cofounder_m: "Mitbegründer",
+                    role_collab: "Forschungspartner",
+                    spec_jd: "Waldinventur • Data Science • Fernerkundung",
+                    bio_jd: "Dozent und Forscher an der Universidad Nacional de la Amazonía Peruana (UNAP), Leiter des Labors für Waldattribute. Assoziierter Wissenschaftler am Max-Planck-Institut für Biogeochemie.",
+                    spec_st: "Atmosphärenwissenschaften",
+                    bio_st: "Direktorin am Max-Planck-Institut für Biogeochemie und Professorin für Erdsystemwissenschaften an der University of California, Irvine. Erforscht Ökosystemdynamiken und den globalen Kohlenstoffkreislauf.",
+                    spec_dm: "Waldmonitoring • Störungsdynamik • Data Science",
+                    bio_dm: "Wissenschaftler am Julius Kühn-Institut (JKI) für Waldschutz. Er untersucht die Reaktionen von Ökosystemen auf Störungen und wie Baummortalität Waldfunktionen verändert, um klimaangepasste Schutz- und Bewirtschaftungsstrategien zu entwickeln.",
+                    spec_rn: "Atmosphärenwissenschaften • Data Science",
+                    bio_rn: "Wissenschaftler am Lawrence Berkeley National Laboratory (LBNL). Experte für Raumanalysen und Klimawissenschaften zur Untersuchung amazonischer Ökosysteme und meteorologischer Wechselwirkungen.",
+                    spec_atm_rs: "Atmosphärenwissenschaften • Fernerkundung",
+                    spec_inv_rs: "Waldinventur • Fernerkundung",
+                    spec_atm_ds: "Atmosphäre & Data Science",
+                    team_collab: "Kooperationspartner",
+                    team_collab_desc: "WAOSUE arbeitet eng mit einem internationalen Netzwerk aus Wissenschaftlerinnen, Wissenschaftlern und Datenspezialisten zusammen.",
+
+                    // CONTACT & FOOTER
+                    contact_badge: "Kontakt aufnehmen",
+                    contact_title: "Kontakt & Kooperation",
+                    contact_desc: "Interessiert an unserer Forschung, unseren Datensätzen oder an Kooperationsmöglichkeiten? Kontaktieren Sie unser Team.",
+                    contact_direct: "Direkte Anfragen",
+                    contact_email_lbl: "E-Mail-Adresse",
+                    contact_loc: "Hauptstandorte",
+                    contact_data_note: "Datenanfragen: WInD V.1-Daten in Formaten wie Shapefile oder CSV sind auf Anfrage erhältlich. Bitte senden Sie uns eine E-Mail mit einer kurzen Beschreibung Ihres Forschungsvorhabens.",
+                    form_name: "Name",
+                    form_email: "E-Mail",
+                    form_subject: "Betreff",
+                    form_msg: "Nachricht",
+                    form_send: "Nachricht Senden",
+                    footer_visitors: "Eindeutige Besucher Gesamt",
+                    footer_rights: "© 2026 WAOSUE. Alle Rechte vorbehalten.",
+                    footer_license: "Inhalte lizenziert unter CC BY 4.0"
                 }
             };
 
@@ -2064,7 +2283,11 @@
             const navbar = document.getElementById('navbar');
 
             function switchView(targetId, customScrollTarget = null) {
-                if (targetId === 'ai' || !document.getElementById(targetId)) {
+                // Redirect legacy #contact hash to unified #data page and scroll to #contact-block
+                if (targetId === 'contact') {
+                    targetId = 'data';
+                    customScrollTarget = document.getElementById('contact-block');
+                } else if (targetId === 'ai' || !document.getElementById(targetId)) {
                     targetId = 'home';
                 }
 
@@ -2163,7 +2386,6 @@
                                 try {
                                     const innerDoc = lidarFrame.contentDocument || lidarFrame.contentWindow.document;
                                     if (innerDoc && innerDoc.body) {
-                                        // Reset iframe negative margins since we have direct DOM access
                                         lidarFrame.style.width = '100%';
                                         lidarFrame.style.height = '100%';
                                         lidarFrame.style.margin = '0px';
@@ -2190,8 +2412,7 @@
                                         }
                                     }
                                 } catch (e) {
-                                    // If opened via local file:// where browser blocks contentDocument,
-                                    // the CSS calc(100% + 90px) and margin: -45px on #lidar-frame automatically crops out the 40px white border.
+                                    // Local file:// fallback handled by CSS crop
                                 }
                             };
                         }
@@ -2239,7 +2460,7 @@
             }
 
             const hash = window.location.hash.substring(1);
-            if (hash && hash !== 'ai' && document.getElementById(hash)) {
+            if (hash && (document.getElementById(hash) || hash === 'contact')) {
                 switchView(hash);
             } else {
                 switchView('home'); 
@@ -2309,6 +2530,8 @@
                             ? '✓ Abriendo tu cliente de correo con el reporte estructurado para WAOSUE...'
                             : currentLang === 'pt'
                             ? '✓ Abrindo seu cliente de e-mail com o relato estruturado para o WAOSUE...'
+                            : currentLang === 'de'
+                            ? '✓ Ihr E-Mail-Programm wird mit dem strukturierten WAOSUE-Feldbericht geöffnet...'
                             : '✓ Opening your email client with the structured WAOSUE field report...';
                     }
                 });
