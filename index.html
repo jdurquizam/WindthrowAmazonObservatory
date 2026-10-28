@@ -133,19 +133,20 @@
             backdrop-filter: blur(12px);
         }
         
-        /* Partners Carousel CSS (Clickable & Pauses on Hover) */
+        /* Partners Carousel CSS (Large, Full Aspect Ratio, No White Borders) */
         .partners-carousel {
             overflow: hidden;
             white-space: nowrap;
             position: relative;
             width: 100%;
-            padding: 20px 0;
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            padding: 28px 0;
+            mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
         }
         .partners-track {
-            display: inline-flex;
-            animation: marquee 45s linear infinite;
+            display: flex;
+            width: max-content;
+            animation: marquee 40s linear infinite;
             align-items: center;
         }
         .partners-track:hover {
@@ -154,24 +155,27 @@
         .partners-track a {
             display: inline-flex;
             align-items: center;
-            margin: 0 35px;
-            border-radius: 12px;
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            justify-content: center;
+            flex-shrink: 0;
+            margin: 0 45px;
+            transition: transform 0.35s ease;
         }
         .partners-track img {
-            height: 85px;
-            padding: 8px 14px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            height: 115px !important;
+            width: auto !important;
+            max-width: none !important;
+            padding: 0 !important;
+            background: transparent !important;
+            border: none !important;
+            border-radius: 6px;
+            box-shadow: none !important;
             object-fit: contain;
-            transition: all 0.35s ease;
+            transition: transform 0.35s ease, filter 0.35s ease;
             cursor: pointer;
         }
         .partners-track a:hover img {
-            transform: scale(1.07);
-            background: #ffffff;
-            box-shadow: 0 0 20px rgba(74, 222, 128, 0.45);
+            transform: scale(1.1);
+            filter: brightness(1.08);
         }
         @keyframes marquee {
             0% { transform: translateX(0); }
@@ -468,7 +472,7 @@
                     </script>
                 </div>
 
-                <!-- Partner Carousel (Clickable Official Institution Links) -->
+                <!-- Partner Carousel (Clickable Official Institution Links, Large & No White Borders) -->
                 <div class="reveal pt-8 border-t border-white/15">
                     <p class="text-center text-xs font-semibold tracking-widest text-amazon-300 uppercase mb-6 opacity-90" data-i18n="partners_title">Our Partners & Institutional Affiliations</p>
                     <div class="partners-carousel">
@@ -1987,7 +1991,7 @@
                     disc_desc: "Hinterlassen Sie einen Kommentar, stellen Sie eine Frage oder diskutieren Sie unsere Forschung mit Ihrem GitHub-Konto.",
                     partners_title: "Unsere Partner & Institutionelle Verbindungen",
 
-                    // STATE OF THE ART (Vollständige deutsche Übersetzung)
+                    // STATE OF THE ART
                     sota_badge: "Wissenschaftlicher Hintergrund",
                     sota_title: "Stand der Forschung: Windwürfe im Amazonasbecken",
                     sota_subtitle: "Ein umfassender Überblick über sturmbedingte Waldstörungen, die Dynamik von Kronendachlücken und ihre tiefgreifenden Auswirkungen auf den globalen Kohlenstoffkreislauf.",
@@ -2087,7 +2091,7 @@
                     pubs_desc: "Ausgewählte begutachtete Fachartikel (Peer-Review) von WAOSUE-Forschenden.",
                     pubs_read: "Artikel Lesen",
 
-                    // TEAM (Vollständige deutsche Übersetzung)
+                    // TEAM
                     team_badge: "Unser Team",
                     team_title: "Forschende & Netzwerk",
                     filter_all: "Alle Fachgebiete",
@@ -2283,7 +2287,6 @@
             const navbar = document.getElementById('navbar');
 
             function switchView(targetId, customScrollTarget = null) {
-                // Redirect legacy #contact hash to unified #data page and scroll to #contact-block
                 if (targetId === 'contact') {
                     targetId = 'data';
                     customScrollTarget = document.getElementById('contact-block');
